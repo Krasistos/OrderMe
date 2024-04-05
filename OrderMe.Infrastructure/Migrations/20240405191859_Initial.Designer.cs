@@ -12,8 +12,8 @@ using OrderMe.Infrastructure.Data;
 namespace OrderMe.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240405190205_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240405191859_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
