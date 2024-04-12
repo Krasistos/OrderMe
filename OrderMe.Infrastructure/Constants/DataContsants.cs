@@ -8,5 +8,33 @@ namespace OrderMe.Infrastructure.Constants
 {
     public static class DataConstants
     {
+        public static class Driver
+        {
+            public const int RatingMinValue = 0;
+            public const int RatingMaxValue = 10;
+        }
+
+        public static class Vehicle
+        {
+            public const int LicensePlateLength = 10;
+
+            public const int MakeMinLength = 1;
+            public const int MakeMaxLength = 50;
+
+            public const int ModelMinLength = 1;
+            public const int ModelMaxLength = 50;
+        }
+
+        public static class Garage
+        {
+            public const int NameMinLength = 1;
+            public const int NameMaxLength = 50;
+
+            public const double LocationLatitudeMin = -90;
+            public const double LocationLatitudeMax = 90;
+
+            public const double LocationLongitudeMin = -180;
+            public const double LocationLongitudeMax = 180;
+        }
     }
 }
