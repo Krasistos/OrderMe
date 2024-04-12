@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OrderMe.Infrastructure.Data;
 using OrderMe.Infrastructure.Data.Common;
+using OrderMe.Infrastructure.Data.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
