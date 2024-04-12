@@ -2,15 +2,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static OrderMe.Infrastructure.Constants.DataConstants;
-using static OrderMe.Infrastructure.Constants.DataConstants.Garage;
+using static OrderMe.Infrastructure.Constants.DataConstants.Restaurant;
 
 namespace OrderMe.Infrastructure.Data.Models
 {
-    [Comment("Garage")]
-    public class Garage
+    [Comment("Restaurant")]
+    public class Restaurant
     {
         [Key]
-        [Comment("Garage Identifier")]
+        [Comment("Restaurant Identifier")]
         public int Id { get; set; }
 
         [Required]
@@ -21,15 +21,15 @@ namespace OrderMe.Infrastructure.Data.Models
         public virtual ApplicationUser User { get; set; } = null!;
 
         [Required, MaxLength(NameMaxLength)]
-        [Comment("Garage Name")]
+        [Comment("Restaurant Name")]
         public string Name { get; set; }
 
         [Required, Range(LocationLatitudeMin, LocationLatitudeMax)]
-        [Comment("Garage Address's Latitude")]
+        [Comment("Restaurant Address's Latitude")]
         public double LocationLat { get; set; }
 
         [Required, Range(LocationLongitudeMin, LocationLongitudeMax)]
-        [Comment("Garage Address's Longituude")]
+        [Comment("Restaurant Address's Longituude")]
         public double LocationLng { get; set; }
 
         [Required]
@@ -37,11 +37,10 @@ namespace OrderMe.Infrastructure.Data.Models
         public bool IsActive { get; set; } // prety much allways
 
         [Required]
-        [Comment("When was the garage created")]
+        [Comment("When was the restaurant created")]
         public DateTime CreationDate { get; set; }
 
-        // Navigation properties
-        public virtual List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
-
+        [Required, Range(RatingMinValue, RatingMaxValue)]
+        public double Rating { get; set; }
     }
 }
