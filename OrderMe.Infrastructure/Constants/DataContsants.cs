@@ -53,5 +53,20 @@ namespace OrderMe.Infrastructure.Constants
             public const int RatingMinValue = 0;
             public const int RatingMaxValue = 10;
         }
+
+        public static class MenuItem
+        {
+            public const int NameMinLength = 1;
+            public const int NameMaxLength = 50;
+
+            public const int DescriptionMinLength = 1;
+            public const int DescriptionMaxLength = 100;
+
+            public const int PriceMinValue = 1;
+            public const int PriceMaxValue = 300;
+
+            public const int QuantityMinValue = 1;
+            public const int QuantityMaxValue = 100;
+        }
     }
 }
