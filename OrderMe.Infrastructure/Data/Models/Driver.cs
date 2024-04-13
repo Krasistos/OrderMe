@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-using static OrderMe.Infrastructure.Constants.DataConstants.Driver;
 
 namespace OrderMe.Infrastructure.Data.Models
 {
@@ -21,13 +20,6 @@ namespace OrderMe.Infrastructure.Data.Models
         public virtual ApplicationUser User { get; set; } = null!;
 
         [Required]
-        [Comment("Vehicle Identifier")]
-        public int VehicleId { get; set; }
-
-        [ForeignKey(nameof(VehicleId))]
-        public virtual Vehicle Vehicle { get; set; } = null!;
-
-        [Required]
         [Comment("Is the driver occupied")]
         public bool IsActive { get; set; }
 
@@ -35,8 +27,5 @@ namespace OrderMe.Infrastructure.Data.Models
         [Comment("When did the user become a driver")]
         public DateTime CreatedAt { get; set; }  // it should be set when the user becomes a driver
 
-        [Required,Range(RatingMinValue,RatingMaxValue)]
-        [Comment("The rating of the driver")]
-        public double Rating { get; set; }
     }
 }

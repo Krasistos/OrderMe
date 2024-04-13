@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static OrderMe.Infrastructure.Constants.DataConstants;
@@ -24,13 +25,19 @@ namespace OrderMe.Infrastructure.Data.Models
         [Comment("Garage Name")]
         public string Name { get; set; }
 
-        [Required, Range(LocationLatitudeMin, LocationLatitudeMax)]
-        [Comment("Garage Address's Latitude")]
-        public double LocationLat { get; set; }
+        [Required]
+        [Comment("Garage's location")]
+        // Property to store the double array as JSON in the database
+        [Column(TypeName = "nvarchar(max)")]
+        public string LocationJson { get; set; }
 
-        [Required, Range(LocationLongitudeMin, LocationLongitudeMax)]
-        [Comment("Garage Address's Longituude")]
-        public double LocationLng { get; set; }
+        // Actual array property in the model (not stored in the database)
+        [NotMapped]
+        public double[] LocationArray
+        {
+            get => JsonConvert.DeserializeObject<double[]>(LocationJson);
+            set => LocationJson = JsonConvert.SerializeObject(value);
+        }
 
         [Required]
         [Comment("Is the garage active")]
