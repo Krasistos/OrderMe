@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderMe.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using OrderMe.Infrastructure.Data;
 namespace OrderMe.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413170952_Admin")]
+    partial class Admin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,17 +256,17 @@ namespace OrderMe.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "66785426-86f9-43ad-b6e0-35d32b46cb54",
+                            ConcurrencyStamp = "a1f27c48-23e6-463a-86b3-6b127e592149",
                             Email = "guest@mail.com",
-                            EmailConfirmed = true,
+                            EmailConfirmed = false,
                             FirstName = "Guest",
                             LastName = "Guestov",
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOldNAc6yp5fA8+CvoBva6/4PuCCpDIBMCUKMPrXjCMgAg7n7lZJQB90/bIuWUXzQg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMDGt6y8uWRPYEClPw5vvKIv1zVY0LE6hxl9IQhTnMBC0/JQARhoznOqxxErlzkeLw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c76a19f-8b86-4414-a99c-5adcc89f3e49",
+                            SecurityStamp = "bf5e6673-a425-454d-8445-9bbe6821a128",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -272,17 +274,17 @@ namespace OrderMe.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33b4825e-d18c-408b-9ffb-09bc0fb85931",
+                            ConcurrencyStamp = "c039b874-2ca3-4011-87e1-0a1e0238a84e",
                             Email = "admin@mail.com",
-                            EmailConfirmed = true,
+                            EmailConfirmed = false,
                             FirstName = "Great",
                             LastName = "Admin",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO4Lwu2Wsb17WQYbUb8CiLtcPF+y4L2OdTLgSIrpo/X3xZPHtxgRRu5QbyrYD93BPg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIvWpjlv+iQy4fsWhiCvbHDkkmWbRSIZyhWoO1BS1Yyd34WkbKFIbHu6revIPQKtWg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c8f2bcbb-5423-412e-be3f-c8b46b5a748b",
+                            SecurityStamp = "f02a1a0d-1cc3-481b-9f2d-735dceca75ca",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -306,7 +308,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
 
                     b.HasComment("Cart");
                 });
@@ -337,7 +339,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Drivers", (string)null);
+                    b.ToTable("Drivers");
 
                     b.HasComment("Driver");
                 });
@@ -389,7 +391,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("FoodOrders", (string)null);
+                    b.ToTable("FoodOrders");
 
                     b.HasComment("Food Order");
                 });
@@ -436,7 +438,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Garages", (string)null);
+                    b.ToTable("Garages");
 
                     b.HasComment("Garage");
                 });
@@ -477,7 +479,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("MenuItems", (string)null);
+                    b.ToTable("MenuItems");
 
                     b.HasComment("Menu Item");
                 });
@@ -499,7 +501,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderMeAgency", (string)null);
+                    b.ToTable("OrderMeAgency");
 
                     b.HasComment("OrderMe Agency");
                 });
@@ -546,7 +548,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Restaurants", (string)null);
+                    b.ToTable("Restaurants");
 
                     b.HasComment("Restaurant");
                 });
@@ -595,7 +597,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("RideOrders", (string)null);
+                    b.ToTable("RideOrders");
 
                     b.HasComment("Ride Order");
                 });
@@ -642,7 +644,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("GarageId");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.ToTable("Vehicles");
 
                     b.HasComment("Vehicle");
                 });

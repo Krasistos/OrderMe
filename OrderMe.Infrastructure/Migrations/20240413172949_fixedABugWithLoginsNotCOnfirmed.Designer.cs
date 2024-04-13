@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderMe.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using OrderMe.Infrastructure.Data;
 namespace OrderMe.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240413172949_fixedABugWithLoginsNotCOnfirmed")]
+    partial class fixedABugWithLoginsNotCOnfirmed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -306,7 +308,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
 
                     b.HasComment("Cart");
                 });
@@ -337,7 +339,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Drivers", (string)null);
+                    b.ToTable("Drivers");
 
                     b.HasComment("Driver");
                 });
@@ -389,7 +391,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("FoodOrders", (string)null);
+                    b.ToTable("FoodOrders");
 
                     b.HasComment("Food Order");
                 });
@@ -436,7 +438,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Garages", (string)null);
+                    b.ToTable("Garages");
 
                     b.HasComment("Garage");
                 });
@@ -477,7 +479,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.ToTable("MenuItems", (string)null);
+                    b.ToTable("MenuItems");
 
                     b.HasComment("Menu Item");
                 });
@@ -499,7 +501,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderMeAgency", (string)null);
+                    b.ToTable("OrderMeAgency");
 
                     b.HasComment("OrderMe Agency");
                 });
@@ -546,7 +548,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Restaurants", (string)null);
+                    b.ToTable("Restaurants");
 
                     b.HasComment("Restaurant");
                 });
@@ -595,7 +597,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("RideOrders", (string)null);
+                    b.ToTable("RideOrders");
 
                     b.HasComment("Ride Order");
                 });
@@ -642,7 +644,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("GarageId");
 
-                    b.ToTable("Vehicles", (string)null);
+                    b.ToTable("Vehicles");
 
                     b.HasComment("Vehicle");
                 });

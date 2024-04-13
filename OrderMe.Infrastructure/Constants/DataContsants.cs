@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OrderMe.Infrastructure.Constants
+﻿namespace OrderMe.Infrastructure.Constants
 {
     public static class DataConstants
     {
         public const int OrderMeAgencyNameMaxLength = 100;
-
-
+       
         public const double LocationLatitudeMin = -90;
         public const double LocationLatitudeMax = 90;
 
         public const double LocationLongitudeMin = -180;
         public const double LocationLongitudeMax = 180;
+
+        public static class ApplicationUserConstants
+        {
+            public const int UserFirstNameMinLength = 1;
+            public const int UserFirstNameMaxLength = 50;
+
+            public const int UserLastNameMinLength = 1;
+            public const int UserLastNameMaxLength = 50;
+        }
 
         public static class Vehicle
         {

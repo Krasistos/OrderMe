@@ -1,8 +1,25 @@
-﻿@{
+﻿@using static OrderMe.Core.Constants.AdministratorConstants;
+@{
+
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @{
+        // User.HasClaim(c => c.Value == "Great Admin"
+
+        if (User.IsAdmin())
+        {
+
+            <h1 class="display-4">HELLO ADMIN</h1>
+        }
+        else
+        {
+            <h1 class="display-4">HELLO SUCK DICK BC U R NOT AN ADMIN</h1>
+            <h1 class="display-4">HELLO SUCK DICK BC U R NOT AN ADMIN</h1>
+
+            
+        }
+    }
 </div>

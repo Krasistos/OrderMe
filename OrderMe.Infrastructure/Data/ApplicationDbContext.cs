@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OrderMe.Infrastructure.Data.Models;
+using OrderMe.Infrastructure.Data.SeedDb;
+using OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration;
 
 namespace OrderMe.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -26,92 +28,23 @@ namespace OrderMe.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder); // Call base method first
+            //apply all configurations
+            builder.ApplyConfiguration(new UserConfiguration());
 
-            // Configure RideOrder entity
-            builder.Entity<RideOrder>()
-                .HasOne(ro => ro.Driver)
-                .WithMany()
-                .HasForeignKey(ro => ro.DriverId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new UserClaimsConfiguration());
 
-            builder.Entity<RideOrder>()
-                .HasOne(ro => ro.Vehicle)
-                .WithMany()
-                .HasForeignKey(ro => ro.VehicleId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            builder.ApplyConfiguration(new CartConfiguration());
+            builder.ApplyConfiguration(new DriverConfiguration());
+            builder.ApplyConfiguration(new FoodOrderConfiguration());
+            builder.ApplyConfiguration(new GarageConfiguration());
+            builder.ApplyConfiguration(new MenuItemConfiguration());
+            builder.ApplyConfiguration(new OrderMeAgencyConfiguration());
+            builder.ApplyConfiguration(new RestaurantConfiguration());
+            builder.ApplyConfiguration(new RideOrderConfiguration());
+            builder.ApplyConfiguration(new VehicleConfiguration());
 
-            // Configure FoodOrder entity
-            builder.Entity<FoodOrder>()
-                .HasOne(fo => fo.Cart)
-                .WithMany()
-                .HasForeignKey(fo => fo.CartId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<FoodOrder>()
-                .HasOne(fo => fo.Driver)
-                .WithMany()
-                .HasForeignKey(fo => fo.DriverId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<FoodOrder>()
-                .HasOne(fo => fo.Vehicle)
-                .WithMany()
-                .HasForeignKey(fo => fo.VehicleId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<FoodOrder>()
-                .HasOne(fo => fo.Restaurant)
-                .WithMany()
-                .HasForeignKey(fo => fo.RestaurantId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<FoodOrder>()
-                .HasOne(fo => fo.User)
-                .WithMany()
-                .HasForeignKey(fo => fo.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure Restaurant entity
-            builder.Entity<Restaurant>()
-                .HasOne(r => r.User)
-                .WithMany()
-                .HasForeignKey(r => r.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure Garage entity
-            builder.Entity<Garage>()
-                .HasOne(g => g.User)
-                .WithMany()
-                .HasForeignKey(g => g.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure Driver entity
-            builder.Entity<Driver>()
-                .HasOne(d => d.User)
-                .WithMany()
-                .HasForeignKey(d => d.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Configure Cart entity
-            builder.Entity<Cart>()
-                .HasOne(c => c.User)
-                .WithMany()
-                .HasForeignKey(c => c.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            base.OnModelCreating(builder); // Call base method 
         }
-
-
     }
 }

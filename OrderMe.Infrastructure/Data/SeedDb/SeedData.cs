@@ -47,6 +47,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
 
             GuestUser.PasswordHash =
             hasher.HashPassword(GuestUser, "Kurzaushev098@");
+            GuestUser.EmailConfirmed = true;
 
             AdminUser = new ApplicationUser()
             {
@@ -69,6 +70,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
 
             AdminUser.PasswordHash =
             hasher.HashPassword(AdminUser, "admin123");
+            AdminUser.EmailConfirmed = true;
         }
     }
 }
