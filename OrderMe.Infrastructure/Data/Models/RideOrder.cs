@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace OrderMe.Infrastructure.Data.Models
 {
     [Comment("Ride Order")]
-    public class RiderOrder
+    public class RideOrder
     {
         [Key]
         [Comment("Ride Identifier")]

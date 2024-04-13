@@ -16,9 +16,9 @@ namespace OrderMe.Infrastructure.Data.Models
         public string Name { get; set; }
 
         // Navigation properties
-        public List<Restaurant> Restaurants { get; set;} = new List<Restaurant>();
+        public virtual List<Restaurant> Restaurants { get; set;} = new List<Restaurant>();
 
-        public List<Garage> Garages { get; set;} = new List<Garage>();
+        public virtual List<Garage> Garages { get; set;} = new List<Garage>();
 
     }
 }
