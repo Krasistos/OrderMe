@@ -11,19 +11,23 @@ namespace OrderMe.Infrastructure.Data.Models
         [Comment("Menu Item Identifier")]
         public int Id { get; set; }
 
-        [Required,MaxLength(NameMaxLength)]
+        [Required, MaxLength(NameMaxLength)]
         [Comment("Name of the menu item")]
         public string Name { get; set; } = string.Empty;
 
-        [Required,MaxLength(DescriptionMaxLength)]
+        [Required, MaxLength(DescriptionMaxLength)]
         [Comment("Description of the menu item")]
         public string Description { get; set; } = string.Empty;
 
-        [Required,Range(PriceMinValue,PriceMaxValue)]
+        [Required, MaxLength(ImageUrlMaxLength)]
+        [Comment("Image URL of the menu item")]
+        public string ImageUrl { get; set; } = string.Empty;
+
+        [Required, Range(PriceMinValue, PriceMaxValue)]
         [Comment("Price of the menu item")]
         public decimal Price { get; set; }
 
-        [Required,Range(QuantityMinValue, QuantityMaxValue)]
+        [Required, Range(QuantityMinValue, QuantityMaxValue)]
         [Comment("When was the menu item added")]
         public int Quantity { get; set; } // needed for the cart functionality
     }

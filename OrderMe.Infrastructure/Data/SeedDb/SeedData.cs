@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OrderMe.Infrastructure.Data.Models;
-
 using static OrderMe.Infrastructure.Constants.CustomClaims;
 
 namespace OrderMe.Infrastructure.Data.SeedDb
@@ -13,13 +12,18 @@ namespace OrderMe.Infrastructure.Data.SeedDb
         public ApplicationUser GuestUser { get; set; }
         public ApplicationUser AdminUser { get; set; }
 
-
-        //every other model that needs to be seeded should be added here
-
         public SeedData()
         {
-            //call all seeding methods
             SeedUsers();
+            SeedCart();
+            SeedDriver();
+            SeedFoodOrder();
+            SeedGarage();
+            SeedMenuItem();
+            SeedOrderMeAgency();
+            SeedRestaurant();
+            SeedRideOrder();
+            SeedVehicle();
         }
 
         private void SeedUsers()
@@ -48,7 +52,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
             GuestUser.PasswordHash =
             hasher.HashPassword(GuestUser, "Kurzaushev098@");
             GuestUser.EmailConfirmed = true;
-            
+
 
             AdminUser = new ApplicationUser()
             {
@@ -73,6 +77,115 @@ namespace OrderMe.Infrastructure.Data.SeedDb
             hasher.HashPassword(AdminUser, "admin123");
             AdminUser.EmailConfirmed = true;
 
+        }
+
+        private void SeedCart()
+        {
+            // Seed Cart model entities
+            // Example: 
+            // var carts = new List<Cart>
+            // {
+            //     new Cart { UserId = "userId1" },
+            //     new Cart { UserId = "userId2" }
+            // };
+
+            // Add additional setup for carts if needed
+        }
+
+        private void SeedDriver()
+        {
+            // Seed Driver model entities
+            // Example: 
+            // var drivers = new List<Driver>
+            // {
+            //     new Driver { UserId = "userId1", IsActive = true, CreatedAt = DateTime.UtcNow }
+            // };
+
+            // Add additional setup for drivers if needed
+        }
+
+        private void SeedFoodOrder()
+        {
+            // Seed FoodOrder model entities
+            // Example: 
+            // var foodOrders = new List<FoodOrder>
+            // {
+            //     new FoodOrder { CartId = 1, UserId = "userId1", RestaurantId = 1, DriverId = 1, VehicleId = 1, DestinationArray = new double[] { 12.34, 56.78 } }
+            // };
+
+            // Add additional setup for food orders if needed
+        }
+
+        private void SeedGarage()
+        {
+            // Seed Garage model entities
+            // Example: 
+            // var garages = new List<Garage>
+            // {
+            //     new Garage { UserId = "userId1", Name = "Garage1", LocationArray = new double[] { 12.34, 56.78 }, IsActive = true, CreationDate = DateTime.UtcNow }
+            // };
+
+            // Add additional setup for garages if needed
+        }
+
+        private void SeedMenuItem()
+        {
+            // Seed MenuItem model entities
+            // Example: 
+            // var menuItems = new List<MenuItem>
+            // {
+            //     new MenuItem { Name = "Item1", Description = "Description1", Price = 10.99m, Quantity = 2, ImageUrl = "https://example.com/image1.jpg" }
+            // };
+
+            // Add additional setup for menu items if needed
+        }
+
+        private void SeedOrderMeAgency()
+        {
+            // Seed OrderMeAgency model entities
+            // Example: 
+            // var orderMeAgencies = new List<OrderMeAgency>
+            // {
+            //     new OrderMeAgency { Name = "Agency1" }
+            // };
+
+            // Add additional setup for order me agencies if needed
+        }
+
+        private void SeedRestaurant()
+        {
+            // Seed Restaurant model entities
+            // Example: 
+            // var restaurants = new List<Restaurant>
+            // {
+            //     new Restaurant { UserId = "userId1", Name = "Restaurant1", LocationArray = new double[] { 12.34, 56.78 }, IsActive = true, CreationDate = DateTime.UtcNow }
+            // };
+
+            // Add additional setup for restaurants if needed
+        }
+
+        private void SeedRideOrder()
+        {
+            // Seed RideOrder model entities
+            // Example: 
+            // var rideOrders = new List<RideOrder>
+            // {
+            //     new RideOrder { UserId = "userId1", DriverId = 1, VehicleId = 1, PickUpLocationArray = new double[] { 12.34, 56.78 }, DropOffLocationArray = new double[] { 12.34, 56.78 }, SceduledFor = DateTime.UtcNow }
+            // };
+
+            // Add additional setup for ride orders if needed
+        }
+
+        private void SeedVehicle()
+        {
+            // Seed Vehicle model entities
+            // Example: 
+            // var vehicles = new List<Vehicle>
+            // {
+            //     new Vehicle { LicensePlate = "ABC123", Make = "Toyota", Model = "Camry", IsUsed = true, AddedOn = DateTime.UtcNow }
+            // };
+
+            // Add additional setup for vehicles if needed
         }
     }
 }

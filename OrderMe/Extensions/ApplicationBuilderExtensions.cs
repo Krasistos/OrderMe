@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OrderMe.Infrastructure.Data.Models;
+using static OrderMe.Core.Constants.AdministratorConstants;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -12,9 +13,9 @@ namespace Microsoft.AspNetCore.Builder
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             // Ensure admin role exists
-            if (!await roleManager.RoleExistsAsync("Admin"))
+            if (!await roleManager.RoleExistsAsync(AdminRole))
             {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                await roleManager.CreateAsync(new IdentityRole(AdminRole));
             }
 
             // Ensure admin user exists and assign admin role
@@ -22,15 +23,14 @@ namespace Microsoft.AspNetCore.Builder
             if (adminUser == null)
             {
                 adminUser = new ApplicationUser { UserName = "admin@mail.com", Email = "admin@mail.com" };
-                await userManager.CreateAsync(adminUser, "Admin@123"); // Set admin password
+                await userManager.CreateAsync(adminUser, "admin123"); // Set admin password
             }
 
-            if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+            if (!await userManager.IsInRoleAsync(adminUser, AdminRole))
             {
-                await userManager.AddToRoleAsync(adminUser, "Admin");
+                await userManager.AddToRoleAsync(adminUser, AdminRole);
             }
 
-            Console.WriteLine("Admin role and user created successfully.");
         }
     }
 }

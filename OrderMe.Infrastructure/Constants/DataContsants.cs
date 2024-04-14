@@ -58,6 +58,9 @@
 
             public const int QuantityMinValue = 1;
             public const int QuantityMaxValue = 100;
+
+            public const int ImageUrlMinLength = 1;
+            public const int ImageUrlMaxLength = 2048;
         }
     }
 }

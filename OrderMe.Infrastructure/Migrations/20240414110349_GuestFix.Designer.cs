@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderMe.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using OrderMe.Infrastructure.Data;
 namespace OrderMe.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414110349_GuestFix")]
+    partial class GuestFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,7 +256,7 @@ namespace OrderMe.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f6432d66-5149-4689-ba5c-505a1c1409d6",
+                            ConcurrencyStamp = "cb1d930c-24ba-45c3-ae5d-4c3c97930e63",
                             Email = "guest@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Guest",
@@ -262,9 +264,9 @@ namespace OrderMe.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH38XnBS1wT4m+UpAmzUJq7x5AL2BIFvEQH2MpkGXSD0P4SQsU0rF6EH4vB/JixXJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELx7fn+3DocOjfmzzSHsOuNJSovMa7FxDsYG+PwgqCZVP4qJnozlK3eRPHWjjBhXKg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9406deed-215c-4d65-8e4c-ab43f5291482",
+                            SecurityStamp = "ea39f1fb-785b-44cb-8c7a-af02ee150449",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -272,7 +274,7 @@ namespace OrderMe.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "699c2389-c9a1-4783-a212-a7c7fff03048",
+                            ConcurrencyStamp = "391899b4-123c-468c-8b29-42ad301204cb",
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Great",
@@ -280,9 +282,9 @@ namespace OrderMe.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGo3SxV7x4koQesiKCWtmG9/tfVIW1TCeKNKCX/yKFdkXzaHDmIN4/MUbEMiEMHxNQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEittte686rtQ2LbaaNX3mu/dpr7FKXCnOa4ZJPKrWUOAs6M/PPVwPeo7B82qzqQxg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ee135151-1c30-484e-a603-1d7c381d6693",
+                            SecurityStamp = "bf253231-c6d7-4fba-b4c3-e82952816c8f",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -458,12 +460,6 @@ namespace OrderMe.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasComment("Description of the menu item");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(2048)
-                        .HasColumnType("nvarchar(2048)")
-                        .HasComment("Image URL of the menu item");
 
                     b.Property<string>("Name")
                         .IsRequired()
