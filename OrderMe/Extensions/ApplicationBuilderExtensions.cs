@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OrderMe.Infrastructure.Data.Models;
-using static OrderMe.Core.Constants.AdministratorConstants;
 
 namespace Microsoft.AspNetCore.Builder
 {
@@ -12,19 +11,26 @@ namespace Microsoft.AspNetCore.Builder
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            if (userManager != null && roleManager != null && await roleManager.RoleExistsAsync(AdminRole) == false)
+            // Ensure admin role exists
+            if (!await roleManager.RoleExistsAsync("Admin"))
             {
-                var role = new IdentityRole(AdminRole);
-                await roleManager.CreateAsync(role);
-
-                var admin = await userManager.FindByEmailAsync("admin@mail.com");
-
-                if (admin != null)
-                {
-                    await userManager.AddToRoleAsync(admin, role.Name);
-                }
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
             }
 
+            // Ensure admin user exists and assign admin role
+            var adminUser = await userManager.FindByEmailAsync("admin@mail.com");
+            if (adminUser == null)
+            {
+                adminUser = new ApplicationUser { UserName = "admin@mail.com", Email = "admin@mail.com" };
+                await userManager.CreateAsync(adminUser, "Admin@123"); // Set admin password
+            }
+
+            if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+            {
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
+
+            Console.WriteLine("Admin role and user created successfully.");
         }
     }
 }

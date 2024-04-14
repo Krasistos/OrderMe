@@ -1,17 +1,16 @@
-﻿using static OrderMe.Core.Constants.AdministratorConstants;
+﻿using System.Security.Claims;
+using static OrderMe.Core.Constants.AdministratorConstants;
 
-namespace System.Security.Claims
+public static class ClaimsPrincipalExtensions
 {
-    public static class ClaimsPrincipalExtensions
-    {
-        public static string Id(this ClaimsPrincipal user)
-        {
-            return user.FindFirstValue(ClaimTypes.NameIdentifier);
-        }
 
-        public static bool IsAdmin(this ClaimsPrincipal user)
-        {
-            return user.IsInRole(AdminRole);
-        }
+    public static bool IsAdmin(this ClaimsPrincipal user)
+    {
+        return user != null &&
+               user.Identity != null &&
+               user.Identity.IsAuthenticated &&
+               user.IsInRole(AdminRole);
     }
+
+
 }

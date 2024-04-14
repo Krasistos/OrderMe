@@ -1,25 +1,20 @@
-﻿@using static OrderMe.Core.Constants.AdministratorConstants;
-@{
+﻿
+<h1>Welcome to the Home Page!</h1>
 
-    ViewData["Title"] = "Home Page";
-}
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Hello, @User.Identity.Name!</p>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    @{
-        // User.HasClaim(c => c.Value == "Great Admin"
-
-        if (User.IsAdmin())
-        {
-
-            <h1 class="display-4">HELLO ADMIN</h1>
-        }
-        else
-        {
-            <h1 class="display-4">HELLO SUCK DICK BC U R NOT AN ADMIN</h1>
-            <h1 class="display-4">HELLO SUCK DICK BC U R NOT AN ADMIN</h1>
-
-            
-        }
+    @if (User.IsAdmin())
+    {
+        <p>You are an admin!</p>
     }
-</div>
+    else
+    {
+        <p>You are not an admin.</p>
+    }
+}
+else
+{
+    <p>You are not authenticated.</p>
+}
