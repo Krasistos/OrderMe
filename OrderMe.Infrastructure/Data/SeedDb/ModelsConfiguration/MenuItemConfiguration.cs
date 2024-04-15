@@ -8,6 +8,11 @@ namespace OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration
     {
         public void Configure(EntityTypeBuilder<MenuItem> builder)
         {
+            builder
+               .Property(v => v.ImageData)
+               .IsRequired()
+               .HasColumnType("varbinary(max)");
+
             var data = new SeedData();
             builder.HasData(data.MenuItem);
         }

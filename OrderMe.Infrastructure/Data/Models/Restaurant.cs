@@ -46,6 +46,10 @@ namespace OrderMe.Infrastructure.Data.Models
         [Required]
         [Comment("When was the restaurant created")]
         public DateTime CreationDate { get; set; }
+
+
+        // Navigation properties
+        public virtual List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
       
     }
 }

@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using static OrderMe.Infrastructure.Constants.DataConstants.Vehicle;
 using static OrderMe.Infrastructure.Constants.DataConstants;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrderMe.Infrastructure.Data.Models
 {
@@ -24,7 +26,7 @@ namespace OrderMe.Infrastructure.Data.Models
         [Comment("Vehicle's model")]
         public string Model { get; set; }
 
-        [Required, MaxLength(ImageUrlMaxLength)]
+        [Required]
         [Comment("Image URL of the menu item")]
         public string ImageUrl { get; set; } = string.Empty;
 
@@ -35,6 +37,13 @@ namespace OrderMe.Infrastructure.Data.Models
         [Required]
         [Comment("When was the vehicle added")]
         public DateTime AddedOn { get; set; }
+
+        [Required]
+        [Comment("Image of the menu item")]
+        public byte[] ImageData { get; set; } // Byte array to store image data
+
+        [NotMapped] 
+        public IFormFile ImageFile { get; set; } // Property for uploading image file
 
     }
 }

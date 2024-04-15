@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 using OrderMe.Infrastructure.Data;
 using OrderMe.Infrastructure.Data.Common;
 using OrderMe.Infrastructure.Data.Models;
 using OrderMe.Models;
+using static OrderMe.Infrastructure.Constants.DataConstants;
 
 public class HomeController : Controller
 {
@@ -18,11 +20,23 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var model = new HomeViewModel()
+        //var model = new HomeViewModel()
+        //{
+        //    CarUrl = context.Vehicles.FirstOrDefault().ImageUrl,
+        //    PancakesUrl = context.MenuItems.FirstOrDefault().ImageUrl
+        //};
+        //return View(model);
+
+        var menuItems = context.MenuItems.ToList();
+        var vehicles = context.Vehicles.ToList();
+
+        var viewModel = new MenuAndVehicleViewModel
         {
-            CarUrl = context.Vehicles.FirstOrDefault().ImageUrl,
-            PancakesUrl = context.MenuItems.FirstOrDefault().ImageUrl
+            MenuItems = menuItems,
+            Vehicles = vehicles
         };
-        return View(model);
+
+        return View(viewModel);
+
     }
 }

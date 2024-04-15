@@ -1,22 +1,41 @@
-﻿@model OrderMe.Models.HomeViewModel
-<h1>Welcome to the Home Page!</h1>
+﻿@model MenuAndVehicleViewModel
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p>Hello, @User.Identity.Name!</p>
 
+<h1>Menu Items</h1>
+
+<ul>
+    @if (User.Identity.IsAuthenticated)
+    {
+        
+    
     @if (User.IsAdmin())
     {
-        <p>You are an admin! Here is a car </p>
-        <img src="@Model.CarUrl" alt="Image">
+        @foreach (var vehicle in Model.Vehicles)
+        {
+            <li>
+                <h3>@vehicle.Make</h3>
+                <h3>@vehicle.Model</h3>
+                <!-- Display the image if ImageData is stored as byte[] -->
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(vehicle.ImageData)" alt="@vehicle.Make" />
+            </li>
+        }
     }
     else
     {
-        <p>You are not an admin.</p>
-        <img src="@Model.PancakesUrl" alt="Image">
+        @foreach (var menuItem in Model.MenuItems)
+        {
+            <li>
+                <h3>@menuItem.Name</h3>
+                <p>@menuItem.Description</p>
+                <p>Price: @menuItem.Price</p>
+                <!-- Display the image if ImageData is stored as byte[] -->
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(menuItem.ImageData)" alt="@menuItem.Name" />
+            </li>
+        }
     }
-}
-else
-{
-    <p>You are not authenticated.</p>
-}
+    }
+    else
+    {
+        <p>Log in to see the images</p>
+    }
+</ul>

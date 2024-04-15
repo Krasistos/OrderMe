@@ -2,6 +2,8 @@
 using OrderMe.Infrastructure.Data.Models;
 using static OrderMe.Infrastructure.Constants.CustomClaims;
 using System;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.Http;
 
 namespace OrderMe.Infrastructure.Data.SeedDb
 {
@@ -106,11 +108,6 @@ namespace OrderMe.Infrastructure.Data.SeedDb
             Garage = new Garage { Id = 1, UserId = GuestUser.Id, Name = "FastGarage", LocationArray = new double[] { 42.713754697211016, 23.302001953125 }, IsActive = true, CreationDate = DateTime.UtcNow };
         }
 
-        private void SeedMenuItem()
-        {
-            MenuItem = new MenuItem { Id = 1, Name = "Pancakes", Description = "Tasty, with butter on top and some cream", Price = 10.99m, Quantity = 1, ImageUrl = "https://www.allrecipes.com/thmb/WqWggh6NwG-r8PoeA3OfW908FUY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-Good-old-Fashioned-Pancakes-mfs_001-1fa26bcdedc345f182537d95b6cf92d8.jpg" };
-        }
-
         private void SeedOrderMeAgency()
         {
             OrderMeAgency = new OrderMeAgency { Id = 1, Name = "Krasi's Agency" };
@@ -121,9 +118,52 @@ namespace OrderMe.Infrastructure.Data.SeedDb
             Restaurant = new Restaurant { Id = 1, UserId = GuestUser.Id, Name = "FreshRestau", LocationArray = new double[] { 42.69397924906779, 23.316393450495653 }, IsActive = true, CreationDate = DateTime.UtcNow };
         }
 
+        private void SeedMenuItem()
+        {
+            var imageData = LoadImageDataFromFile("../menuItemFirst.jpg");
+
+            MenuItem = new MenuItem {
+                Id = 1
+                , Name = "Pancakes"
+                , Description = "Tasty, with butter on top and some cream"
+                , Price = 10.99m, Quantity = 1
+                , ImageData = imageData
+                , ImageFile = new FormFile(new MemoryStream(imageData), 0, imageData.Length, "ImageFile", "menuItemFirst.jpg")
+            };
+        }
+
         private void SeedVehicle()
         {
-            Vehicle = new Vehicle { Id = 1, LicensePlate = "CB 8888 MK", Make = "Mercedes-Benz", Model = "AMG GT R", IsUsed = true, AddedOn = DateTime.UtcNow, ImageUrl = "https://cdn.motor1.com/images/mgl/EMnA3/s1/2020-mercedes-amg-gt-r-driving-notes.jpg" };
+            var imageData = LoadImageDataFromFile("../vehicleFirst.jpg");
+
+            Vehicle = new Vehicle { 
+                Id = 1
+                , LicensePlate = "CB 8888 MK"
+                , Make = "Mercedes-Benz"
+                , Model = "AMG GT R"
+                , IsUsed = true
+                , AddedOn = DateTime.UtcNow
+                ,ImageData = imageData
+                ,ImageFile = new FormFile(new MemoryStream(imageData), 0, imageData.Length, "ImageFile", "vehicleFirst.jpg")
+            };
         }
+
+        public byte[] LoadImageDataFromFile(string imagePath)
+        {
+            byte[] imageData;
+
+            // Read image file and convert to byte array
+            using (var stream = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    stream.CopyTo(memoryStream);
+                    imageData = memoryStream.ToArray();
+                }
+            }
+
+            return imageData;
+        }
+
     }
 }
