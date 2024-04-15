@@ -27,10 +27,6 @@ namespace OrderMe.Infrastructure.Data.Models
         public string Model { get; set; }
 
         [Required]
-        [Comment("Image URL of the menu item")]
-        public string ImageUrl { get; set; } = string.Empty;
-
-        [Required]
         [Comment("Is the vehicle in use")]
         public bool IsUsed { get; set; }
 
