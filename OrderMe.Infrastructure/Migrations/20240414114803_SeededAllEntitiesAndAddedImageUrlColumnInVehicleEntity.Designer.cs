@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrderMe.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using OrderMe.Infrastructure.Data;
 namespace OrderMe.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414114803_SeededAllEntitiesAndAddedImageUrlColumnInVehicleEntity")]
+    partial class SeededAllEntitiesAndAddedImageUrlColumnInVehicleEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,7 +256,7 @@ namespace OrderMe.Infrastructure.Migrations
                         {
                             Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "902faf24-f408-411d-aadb-9a13261a9092",
+                            ConcurrencyStamp = "3e45a876-3272-4611-afc9-dc28a2feab49",
                             Email = "guest@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Guest",
@@ -262,9 +264,9 @@ namespace OrderMe.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAfHzUQ1KknPZzN6q2+KyAXJYwSGsYurZq5sZFqWPV4H9DSvt/91Atn09ZzYR1NCiA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIngkVr9l1lwYzWTatcELxmTMM++ldYIyHHUFKO4F7Ee52rE1ml0bOBsa7S8yn52Qg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b91d8193-1d46-4374-8d72-877797fc87eb",
+                            SecurityStamp = "04c7ddc5-0f53-4036-a5ee-bddb70780b12",
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"
                         },
@@ -272,7 +274,7 @@ namespace OrderMe.Infrastructure.Migrations
                         {
                             Id = "e43ce836-997d-4927-ac59-74e8c41bbfd3",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd6a52e0-1607-4b2c-ac71-d2a2ea70cd1a",
+                            ConcurrencyStamp = "d74a1749-a108-4921-a9b5-0dbbc08adc9d",
                             Email = "admin@mail.com",
                             EmailConfirmed = true,
                             FirstName = "Great",
@@ -280,9 +282,9 @@ namespace OrderMe.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.COM",
                             NormalizedUserName = "ADMIN@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDb2Z/HNjneBNFEgN1Xx12edORD8lHI3nVYnvxfYL5QuJk99LvpkGwMfsZUMV4VM1w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGo1UvLePtE+A8MJBd37hXhe4XUU4IgM4asNGGM050uucKn0d3Q0ZIbmEsUVJpbkiA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "93da7797-1668-4d24-8588-b979677dfdc2",
+                            SecurityStamp = "22550293-60a9-4450-890a-3765477a2bf0",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -309,13 +311,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("Carts");
 
                     b.HasComment("Cart");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
-                        });
                 });
 
             modelBuilder.Entity("OrderMe.Infrastructure.Data.Models.Driver", b =>
@@ -347,15 +342,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("Drivers");
 
                     b.HasComment("Driver");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 4, 14, 12, 1, 51, 948, DateTimeKind.Utc).AddTicks(4437),
-                            IsActive = true,
-                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
-                        });
                 });
 
             modelBuilder.Entity("OrderMe.Infrastructure.Data.Models.FoodOrder", b =>
@@ -455,17 +441,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("Garages");
 
                     b.HasComment("Garage");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreationDate = new DateTime(2024, 4, 14, 12, 1, 51, 952, DateTimeKind.Utc).AddTicks(5926),
-                            IsActive = true,
-                            LocationJson = "[42.713754697211016,23.302001953125]",
-                            Name = "FastGarage",
-                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
-                        });
                 });
 
             modelBuilder.Entity("OrderMe.Infrastructure.Data.Models.MenuItem", b =>
@@ -513,17 +488,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("MenuItems");
 
                     b.HasComment("Menu Item");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Tasty, with butter on top and some cream",
-                            ImageUrl = "https://www.allrecipes.com/thmb/WqWggh6NwG-r8PoeA3OfW908FUY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-Good-old-Fashioned-Pancakes-mfs_001-1fa26bcdedc345f182537d95b6cf92d8.jpg",
-                            Name = "Pancakes",
-                            Price = 10.99m,
-                            Quantity = 1
-                        });
                 });
 
             modelBuilder.Entity("OrderMe.Infrastructure.Data.Models.OrderMeAgency", b =>
@@ -546,13 +510,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("OrderMeAgency");
 
                     b.HasComment("OrderMe Agency");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Krasi's Agency"
-                        });
                 });
 
             modelBuilder.Entity("OrderMe.Infrastructure.Data.Models.Restaurant", b =>
@@ -600,17 +557,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("Restaurants");
 
                     b.HasComment("Restaurant");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreationDate = new DateTime(2024, 4, 14, 12, 1, 51, 962, DateTimeKind.Utc).AddTicks(3318),
-                            IsActive = true,
-                            LocationJson = "[42.69397924906779,23.316393450495653]",
-                            Name = "FreshRestau",
-                            UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
-                        });
                 });
 
             modelBuilder.Entity("OrderMe.Infrastructure.Data.Models.RideOrder", b =>
@@ -713,18 +659,6 @@ namespace OrderMe.Infrastructure.Migrations
                     b.ToTable("Vehicles");
 
                     b.HasComment("Vehicle");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddedOn = new DateTime(2024, 4, 14, 12, 1, 51, 965, DateTimeKind.Utc).AddTicks(7362),
-                            ImageUrl = "https://cdn.motor1.com/images/mgl/EMnA3/s1/2020-mercedes-amg-gt-r-driving-notes.jpg",
-                            IsUsed = true,
-                            LicensePlate = "CB 8888 MK",
-                            Make = "Mercedes-Benz",
-                            Model = "AMG GT R"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

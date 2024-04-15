@@ -1,4 +1,4 @@
-﻿
+﻿@model OrderMe.Models.HomeViewModel
 <h1>Welcome to the Home Page!</h1>
 
 @if (User.Identity.IsAuthenticated)
@@ -7,11 +7,13 @@
 
     @if (User.IsAdmin())
     {
-        <p>You are an admin!</p>
+        <p>You are an admin! Here is a car </p>
+        <img src="@Model.CarUrl" alt="Image">
     }
     else
     {
         <p>You are not an admin.</p>
+        <img src="@Model.PancakesUrl" alt="Image">
     }
 }
 else

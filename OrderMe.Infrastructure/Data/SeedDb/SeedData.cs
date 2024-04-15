@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OrderMe.Infrastructure.Data.Models;
 using static OrderMe.Infrastructure.Constants.CustomClaims;
+using System;
 
 namespace OrderMe.Infrastructure.Data.SeedDb
 {
@@ -12,17 +13,30 @@ namespace OrderMe.Infrastructure.Data.SeedDb
         public ApplicationUser GuestUser { get; set; }
         public ApplicationUser AdminUser { get; set; }
 
+        public Cart Cart { get; set; }
+
+        public Driver Driver { get; set; }
+
+        public Garage Garage { get; set; }
+
+        public MenuItem MenuItem { get; set; }
+
+        public OrderMeAgency OrderMeAgency { get; set; }
+
+        public Restaurant Restaurant { get; set; }
+
+        public Vehicle Vehicle { get; set; }
+
         public SeedData()
         {
+            // Initialize seed methods
             SeedUsers();
             SeedCart();
             SeedDriver();
-            SeedFoodOrder();
             SeedGarage();
             SeedMenuItem();
             SeedOrderMeAgency();
             SeedRestaurant();
-            SeedRideOrder();
             SeedVehicle();
         }
 
@@ -49,8 +63,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
             };
 
-            GuestUser.PasswordHash =
-            hasher.HashPassword(GuestUser, "Kurzaushev098@");
+            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "Kurzaushev098@");
             GuestUser.EmailConfirmed = true;
 
 
@@ -73,119 +86,44 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 ClaimValue = "Great Admin"
             };
 
-            AdminUser.PasswordHash =
-            hasher.HashPassword(AdminUser, "admin123");
+            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin123");
             AdminUser.EmailConfirmed = true;
 
         }
 
         private void SeedCart()
         {
-            // Seed Cart model entities
-            // Example: 
-            // var carts = new List<Cart>
-            // {
-            //     new Cart { UserId = "userId1" },
-            //     new Cart { UserId = "userId2" }
-            // };
-
-            // Add additional setup for carts if needed
+            Cart = new Cart { Id = 1, UserId = GuestUser.Id };
         }
 
         private void SeedDriver()
         {
-            // Seed Driver model entities
-            // Example: 
-            // var drivers = new List<Driver>
-            // {
-            //     new Driver { UserId = "userId1", IsActive = true, CreatedAt = DateTime.UtcNow }
-            // };
-
-            // Add additional setup for drivers if needed
-        }
-
-        private void SeedFoodOrder()
-        {
-            // Seed FoodOrder model entities
-            // Example: 
-            // var foodOrders = new List<FoodOrder>
-            // {
-            //     new FoodOrder { CartId = 1, UserId = "userId1", RestaurantId = 1, DriverId = 1, VehicleId = 1, DestinationArray = new double[] { 12.34, 56.78 } }
-            // };
-
-            // Add additional setup for food orders if needed
+            Driver = new Driver { Id = 1, UserId = GuestUser.Id, IsActive = true, CreatedAt = DateTime.UtcNow };
         }
 
         private void SeedGarage()
         {
-            // Seed Garage model entities
-            // Example: 
-            // var garages = new List<Garage>
-            // {
-            //     new Garage { UserId = "userId1", Name = "Garage1", LocationArray = new double[] { 12.34, 56.78 }, IsActive = true, CreationDate = DateTime.UtcNow }
-            // };
-
-            // Add additional setup for garages if needed
+            Garage = new Garage { Id = 1, UserId = GuestUser.Id, Name = "FastGarage", LocationArray = new double[] { 42.713754697211016, 23.302001953125 }, IsActive = true, CreationDate = DateTime.UtcNow };
         }
 
         private void SeedMenuItem()
         {
-            // Seed MenuItem model entities
-            // Example: 
-            // var menuItems = new List<MenuItem>
-            // {
-            //     new MenuItem { Name = "Item1", Description = "Description1", Price = 10.99m, Quantity = 2, ImageUrl = "https://example.com/image1.jpg" }
-            // };
-
-            // Add additional setup for menu items if needed
+            MenuItem = new MenuItem { Id = 1, Name = "Pancakes", Description = "Tasty, with butter on top and some cream", Price = 10.99m, Quantity = 1, ImageUrl = "https://www.allrecipes.com/thmb/WqWggh6NwG-r8PoeA3OfW908FUY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/21014-Good-old-Fashioned-Pancakes-mfs_001-1fa26bcdedc345f182537d95b6cf92d8.jpg" };
         }
 
         private void SeedOrderMeAgency()
         {
-            // Seed OrderMeAgency model entities
-            // Example: 
-            // var orderMeAgencies = new List<OrderMeAgency>
-            // {
-            //     new OrderMeAgency { Name = "Agency1" }
-            // };
-
-            // Add additional setup for order me agencies if needed
+            OrderMeAgency = new OrderMeAgency { Id = 1, Name = "Krasi's Agency" };
         }
 
         private void SeedRestaurant()
         {
-            // Seed Restaurant model entities
-            // Example: 
-            // var restaurants = new List<Restaurant>
-            // {
-            //     new Restaurant { UserId = "userId1", Name = "Restaurant1", LocationArray = new double[] { 12.34, 56.78 }, IsActive = true, CreationDate = DateTime.UtcNow }
-            // };
-
-            // Add additional setup for restaurants if needed
-        }
-
-        private void SeedRideOrder()
-        {
-            // Seed RideOrder model entities
-            // Example: 
-            // var rideOrders = new List<RideOrder>
-            // {
-            //     new RideOrder { UserId = "userId1", DriverId = 1, VehicleId = 1, PickUpLocationArray = new double[] { 12.34, 56.78 }, DropOffLocationArray = new double[] { 12.34, 56.78 }, SceduledFor = DateTime.UtcNow }
-            // };
-
-            // Add additional setup for ride orders if needed
+            Restaurant = new Restaurant { Id = 1, UserId = GuestUser.Id, Name = "FreshRestau", LocationArray = new double[] { 42.69397924906779, 23.316393450495653 }, IsActive = true, CreationDate = DateTime.UtcNow };
         }
 
         private void SeedVehicle()
         {
-            // Seed Vehicle model entities
-            // Example: 
-            // var vehicles = new List<Vehicle>
-            // {
-            //     new Vehicle { LicensePlate = "ABC123", Make = "Toyota", Model = "Camry", IsUsed = true, AddedOn = DateTime.UtcNow }
-            // };
-
-            // Add additional setup for vehicles if needed
+            Vehicle = new Vehicle { Id = 1, LicensePlate = "CB 8888 MK", Make = "Mercedes-Benz", Model = "AMG GT R", IsUsed = true, AddedOn = DateTime.UtcNow, ImageUrl = "https://cdn.motor1.com/images/mgl/EMnA3/s1/2020-mercedes-amg-gt-r-driving-notes.jpg" };
         }
     }
 }

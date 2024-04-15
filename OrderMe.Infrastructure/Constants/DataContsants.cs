@@ -10,6 +10,8 @@
         public const double LocationLongitudeMin = -180;
         public const double LocationLongitudeMax = 180;
 
+        public const int ImageUrlMinLength = 1;
+        public const int ImageUrlMaxLength = 2048;
         public static class ApplicationUserConstants
         {
             public const int UserFirstNameMinLength = 1;
@@ -59,8 +61,7 @@
             public const int QuantityMinValue = 1;
             public const int QuantityMaxValue = 100;
 
-            public const int ImageUrlMinLength = 1;
-            public const int ImageUrlMaxLength = 2048;
+          
         }
     }
 }

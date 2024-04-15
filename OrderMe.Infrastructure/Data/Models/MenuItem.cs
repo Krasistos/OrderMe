@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using static OrderMe.Infrastructure.Constants.DataConstants.MenuItem;
+using static OrderMe.Infrastructure.Constants.DataConstants;
 
 namespace OrderMe.Infrastructure.Data.Models
 {

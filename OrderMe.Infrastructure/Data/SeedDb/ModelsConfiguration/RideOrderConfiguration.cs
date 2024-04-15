@@ -21,6 +21,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration
                 .HasForeignKey(ro => ro.VehicleId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

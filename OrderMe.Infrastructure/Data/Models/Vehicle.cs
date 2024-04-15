@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using static OrderMe.Infrastructure.Constants.DataConstants.Vehicle;
+using static OrderMe.Infrastructure.Constants.DataConstants;
 
 namespace OrderMe.Infrastructure.Data.Models
 {
@@ -22,6 +23,10 @@ namespace OrderMe.Infrastructure.Data.Models
         [Required,MaxLength(ModelMaxLength)]
         [Comment("Vehicle's model")]
         public string Model { get; set; }
+
+        [Required, MaxLength(ImageUrlMaxLength)]
+        [Comment("Image URL of the menu item")]
+        public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
         [Comment("Is the vehicle in use")]

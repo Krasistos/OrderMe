@@ -14,6 +14,9 @@ namespace OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration
                 .HasForeignKey(g => g.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            var data = new SeedData();
+            builder.HasData(data.Garage);
         }
     }
 }

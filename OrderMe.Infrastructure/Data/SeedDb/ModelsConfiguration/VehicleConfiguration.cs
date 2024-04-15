@@ -8,7 +8,8 @@ namespace OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration
     {
         public void Configure(EntityTypeBuilder<Vehicle> builder)
         {
-
+            var data = new SeedData();
+            builder.HasData(data.Vehicle);
         }
     }
 }

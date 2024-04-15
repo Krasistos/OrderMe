@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OrderMe.Infrastructure.Data.Models;
 
@@ -14,6 +15,9 @@ namespace OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration
                  .HasForeignKey(c => c.UserId)
                  .IsRequired()
                  .OnDelete(DeleteBehavior.Restrict);
+
+            var data = new SeedData();
+            builder.HasData(data.Cart);
         }
     }
 }
