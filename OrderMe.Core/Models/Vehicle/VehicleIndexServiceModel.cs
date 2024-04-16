@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OrderMe.Core.Models
+﻿namespace OrderMe.Core.Models.Vehicle
 {
     public class VehicleIndexServiceModel
     {
         public int Id { get; set; }
         public string Make { get; set; }
 
+        public byte[] ImageData { get; set; }
         public int GargeId { get; set; }
     }
 }

@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+﻿using Microsoft.EntityFrameworkCore;
 using OrderMe.Core.Contracts;
-using OrderMe.Core.Models;
+using OrderMe.Core.Models.Garage;
+using OrderMe.Core.Models.Vehicle;
 using OrderMe.Infrastructure.Data.Common;
 using OrderMe.Infrastructure.Data.Models;
 
@@ -20,30 +19,21 @@ namespace OrderMe.Core.Services
 
         public async Task<IEnumerable<GarageIndexServiceModel>> AllGaragesAsync()
         {
-
-            var model=  await repository.AllReadOnly<Garage>()
+            return await repository.AllReadOnly<Garage>()
                 .Select(g => new GarageIndexServiceModel
-            {
-                Id = g.Id,
-                Name = g.Name,
-                Vehicles = AllVehiclesOfGarageAsync().Result.ToList(),
-            }).ToListAsync();
-
-            return model;
-
+                {
+                    Id = g.Id,
+                    UserId = g.UserId,
+                    Name = g.Name,
+                    Location = g.LocationArray,
+                    IsActive = g.IsActive,
+                    CreationDate = g.CreationDate,
+                }).ToListAsync();
         }
 
-        public async Task<IEnumerable<VehicleIndexServiceModel>> AllVehiclesOfGarageAsync()
+        public Task<IEnumerable<VehicleIndexServiceModel>> AllVehiclesOfGarageAsync(int garageId)
         {
-            var model = await repository.AllReadOnly<Vehicle>()
-                .Select(v => new VehicleIndexServiceModel
-                {
-                    Id = v.Id,
-                    Make = v.Make,
-                    GargeId = v.GarageId
-                }).ToListAsync();
-
-            return model;
+            throw new NotImplementedException();
         }
     }
 }

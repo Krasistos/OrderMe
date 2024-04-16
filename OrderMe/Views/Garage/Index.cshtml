@@ -1,0 +1,18 @@
+﻿@using OrderMe.Core.Models.Garage
+@model  List<GarageIndexServiceModel>
+@foreach (var garage in Model)
+{
+    var user = UserManager.FindByIdAsync(garage.UserId).Result;
+    <div class="card" style="width: 22rem;">
+        <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Garage's name: @garage.Name</h5>
+            <h5 class="card-owner">Owner's full name: @user.FirstName @user.LastName</h5>
+            <h5 class="card-isactive">Is the garage active: @garage.IsActive</h5>
+            <h5 class="card-isactive">Date of creation: @garage.CreationDate</h5>
+
+            <a asp-controller="Garage" asp-action="SeeOnMap" asp-route-garageId="@garage.Id" class="btn btn-primary">See on Map</a>
+            <a asp-controller="Garage" asp-action="ListVehicles" asp-route-garageId="@garage.Id" class="btn btn-primary">List vehicles</a>
+        </div>
+    </div>
+}
