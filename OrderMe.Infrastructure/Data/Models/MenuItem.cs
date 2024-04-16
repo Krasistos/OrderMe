@@ -37,5 +37,11 @@ namespace OrderMe.Infrastructure.Data.Models
 
         [NotMapped] 
         public IFormFile ImageFile { get; set; } // Property for uploading image file
+
+        [Required]
+        [Comment("Restaurant Identifier")]
+        public int RestaurantId { get; set; }
+        [ForeignKey(nameof(RestaurantId))]
+        public virtual Restaurant Restaurant { get; set; } = null!;
     }
 }

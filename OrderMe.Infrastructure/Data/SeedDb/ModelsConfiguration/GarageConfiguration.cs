@@ -15,6 +15,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb.ModelsConfiguration
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
+
             var data = new SeedData();
             builder.HasData(data.Garage);
         }

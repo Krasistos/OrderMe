@@ -12,7 +12,7 @@ namespace OrderMe.Infrastructure.Data
             : base(options)
         {
         }
-      
+
         //Db set with only one record - singleton 
         public DbSet<OrderMeAgency> OrderMeAgency { get; set; } = null!;
 
@@ -26,13 +26,12 @@ namespace OrderMe.Infrastructure.Data
         public DbSet<RideOrder> RideOrders { get; set; } = null!;
         public DbSet<Vehicle> Vehicles { get; set; } = null!;
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //apply all configurations
+            // Apply all configurations
             builder.ApplyConfiguration(new UserConfiguration());
-
             builder.ApplyConfiguration(new UserClaimsConfiguration());
-
             builder.ApplyConfiguration(new CartConfiguration());
             builder.ApplyConfiguration(new DriverConfiguration());
             builder.ApplyConfiguration(new FoodOrderConfiguration());
@@ -43,8 +42,7 @@ namespace OrderMe.Infrastructure.Data
             builder.ApplyConfiguration(new RideOrderConfiguration());
             builder.ApplyConfiguration(new VehicleConfiguration());
 
-
-            base.OnModelCreating(builder); // Call base method 
+            base.OnModelCreating(builder); // Call base method
         }
     }
 }

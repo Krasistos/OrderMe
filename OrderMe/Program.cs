@@ -11,6 +11,9 @@ builder.Services.AddApplicationIdentity(builder.Configuration);
 
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddApplicationServices();
+builder.Services.AddMemoryCache();
+
 var app = builder.Build();
 
 // Middleware

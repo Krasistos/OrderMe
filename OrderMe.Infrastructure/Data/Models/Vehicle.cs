@@ -41,5 +41,11 @@ namespace OrderMe.Infrastructure.Data.Models
         [NotMapped] 
         public IFormFile ImageFile { get; set; } // Property for uploading image file
 
+        [Required]
+        [Comment("Garage Identifier")]  
+        public int GarageId { get; set; }
+
+        [ForeignKey(nameof(GarageId))]
+        public virtual Garage Garage { get; set; } = null!;
     }
 }

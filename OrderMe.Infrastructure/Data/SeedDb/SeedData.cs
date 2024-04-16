@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using OrderMe.Infrastructure.Data.Models;
 using static OrderMe.Infrastructure.Constants.CustomClaims;
-using System;
-using static System.Net.Mime.MediaTypeNames;
-using Microsoft.AspNetCore.Http;
 
 namespace OrderMe.Infrastructure.Data.SeedDb
 {
@@ -35,11 +33,11 @@ namespace OrderMe.Infrastructure.Data.SeedDb
             SeedUsers();
             SeedCart();
             SeedDriver();
-            SeedGarage();
             SeedMenuItem();
             SeedOrderMeAgency();
-            SeedRestaurant();
             SeedVehicle();
+            SeedRestaurant();
+            SeedGarage();
         }
 
         private void SeedUsers()
@@ -105,7 +103,12 @@ namespace OrderMe.Infrastructure.Data.SeedDb
 
         private void SeedGarage()
         {
-            Garage = new Garage { Id = 1, UserId = GuestUser.Id, Name = "FastGarage", LocationArray = new double[] { 42.713754697211016, 23.302001953125 }, IsActive = true, CreationDate = DateTime.UtcNow };
+            Garage = new Garage { Id = 1
+                , UserId = GuestUser.Id
+                , Name = "FastGarage"
+                , LocationArray = new double[] { 42.713754697211016, 23.302001953125 }
+                , IsActive = true, CreationDate = DateTime.UtcNow 
+            };
         }
 
         private void SeedOrderMeAgency()
@@ -115,7 +118,12 @@ namespace OrderMe.Infrastructure.Data.SeedDb
 
         private void SeedRestaurant()
         {
-            Restaurant = new Restaurant { Id = 1, UserId = GuestUser.Id, Name = "FreshRestau", LocationArray = new double[] { 42.69397924906779, 23.316393450495653 }, IsActive = true, CreationDate = DateTime.UtcNow };
+            Restaurant = new Restaurant { Id = 1
+                , UserId = GuestUser.Id
+                , Name = "FreshRestau"
+                , LocationArray = new double[] { 42.69397924906779, 23.316393450495653 }
+                , IsActive = true, CreationDate = DateTime.UtcNow
+                   };
         }
 
         private void SeedMenuItem()
@@ -129,6 +137,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 , Price = 10.99m, Quantity = 1
                 , ImageData = imageData
                 , ImageFile = new FormFile(new MemoryStream(imageData), 0, imageData.Length, "ImageFile", "menuItemFirst.jpg")
+                , RestaurantId = 1
             };
         }
 
@@ -145,6 +154,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 , AddedOn = DateTime.UtcNow
                 ,ImageData = imageData
                 ,ImageFile = new FormFile(new MemoryStream(imageData), 0, imageData.Length, "ImageFile", "vehicleFirst.jpg")
+                , GarageId = 1
             };
         }
 

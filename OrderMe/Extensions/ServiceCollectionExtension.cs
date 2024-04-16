@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OrderMe.Core.Contracts;
+using OrderMe.Core.Services;
 using OrderMe.Infrastructure.Data;
 using OrderMe.Infrastructure.Data.Common;
 using OrderMe.Infrastructure.Data.Models;
@@ -10,6 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IGarageService, GarageService>();
+
             return services;
         }
 
