@@ -1,0 +1,21 @@
+﻿@using OrderMe.Core.Models.Garage
+
+
+@model GarageRegistrationViewModel
+
+<h2>Register New Garage</h2>
+
+<form asp-controller="Garage" asp-action="RegisterGarage" method="post">
+    <div class="form-group">
+        <label for="name">Garage Name:</label>
+        <input type="text" id="name" name="Name" class="form-control" required />
+    </div>
+    <div id="map" style="height: 400px;"></div>
+    <input type="hidden" id="latitude" name="Latitude" />
+    <input type="hidden" id="longitude" name="Longitude" />
+    <div class="form-check">
+        <input type="checkbox" id="isActive" name="IsActive" class="form-check-input" />
+        <label class="form-check-label" for="isActive">Is Active</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Register Garage</button>
+</form>

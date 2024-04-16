@@ -1,5 +1,6 @@
 ﻿@using OrderMe.Core.Models.Garage
-@model  List<GarageIndexServiceModel>
+@model List<GarageIndexServiceModel>
+
 @foreach (var garage in Model)
 {
     var user = UserManager.FindByIdAsync(garage.UserId).Result;
@@ -11,8 +12,16 @@
             <h5 class="card-isactive">Is the garage active: @garage.IsActive</h5>
             <h5 class="card-isactive">Date of creation: @garage.CreationDate</h5>
 
-            <a asp-controller="Garage" asp-action="SeeOnMap" asp-route-garageId="@garage.Id" class="btn btn-primary">See on Map</a>
+
+            @if (User.IsAdmin() || garage.UserId ==  UserManager.GetUserId(User))
+            {
+                <a asp-controller="Garage" asp-action="Edit" asp-route-id="@garage.Id" class="btn btn-primary">Edit</a>
+                <a asp-controller="Garage" asp-action="Delete" asp-route-id="@garage.Id" class="btn btn-primary">Delete</a>
+            }
+
+            <a asp-controller="Map" asp-action="SeeOnMap" asp-route-garageId="@garage.Id" class="btn btn-primary">See location on map</a>
             <a asp-controller="Garage" asp-action="ListVehicles" asp-route-garageId="@garage.Id" class="btn btn-primary">List vehicles</a>
         </div>
     </div>
 }
+

@@ -1,0 +1,21 @@
+﻿<div id="map" style="height: 400px;"></div>
+
+<script>
+    function initMap() {
+        var latitude = @Html.Raw(Json.Serialize(ViewBag.Latitude));
+        var longitude = @Html.Raw(Json.Serialize(ViewBag.Longitude));
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: latitude, lng: longitude },
+            zoom: 15
+        });
+
+        var marker = new google.maps.Marker({
+            position: { lat: latitude, lng: longitude },
+            map: map,
+            title: 'Garage Location'
+        });
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&callback=initMap" async defer></script>

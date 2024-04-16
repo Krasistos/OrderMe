@@ -18,6 +18,6 @@ namespace OrderMe.Core.Models.Garage
 
         public bool IsActive { get; set; }
         public DateTime CreationDate { get; set; }
-        public List<VehicleIndexServiceModel> Vehicles { get; set; }
+        public List<VehicleIndexServiceModel> Vehicles { get; set; } = new List<VehicleIndexServiceModel>();
     }
 }

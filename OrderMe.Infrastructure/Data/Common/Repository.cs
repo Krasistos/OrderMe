@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderMe.Infrastructure.Data.Common
 {
@@ -28,7 +23,8 @@ namespace OrderMe.Infrastructure.Data.Common
 
         public IQueryable<T> AllReadOnly<T>() where T : class
         {
-            return DbSet<T>().AsNoTracking();
+            return DbSet<T>()
+                .AsNoTracking();
         }
 
         public async Task AddAsync<T>(T entity) where T : class
