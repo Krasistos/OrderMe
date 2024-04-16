@@ -1,27 +1,30 @@
 ﻿@using OrderMe.Core.Models.Garage
 @model List<GarageIndexServiceModel>
 
-@foreach (var garage in Model)
-{
-    var user = UserManager.FindByIdAsync(garage.UserId).Result;
-    <div class="card" style="width: 22rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Garage's name: @garage.Name</h5>
-            <h5 class="card-owner">Owner's full name: @user.FirstName @user.LastName</h5>
-            <h5 class="card-isactive">Is the garage active: @garage.IsActive</h5>
-            <h5 class="card-isactive">Date of creation: @garage.CreationDate</h5>
+<div class="row">
+    @foreach (var garage in Model)
+    {
+        var user = UserManager.FindByIdAsync(garage.UserId).Result;
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <!-- Adjust column sizes based on screen width -->
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Garage's name: @garage.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Owner's full name: @user.FirstName @user.LastName</h6>
+                    <p class="card-text">Is the garage active: @garage.IsActive</p>
+                    <p class="card-text">Date of creation: @garage.CreationDate</p>
 
+                    @if (User.IsAdmin() || garage.UserId == UserManager.GetUserId(User))
+                    {
+                        <a asp-controller="Garage" asp-action="Edit" asp-route-id="@garage.Id" class="btn btn-primary mr-2">Edit</a>
+                        <a asp-controller="Garage" asp-action="Delete" asp-route-id="@garage.Id" class="btn btn-danger">Delete</a>
+                    }
 
-            @if (User.IsAdmin() || garage.UserId ==  UserManager.GetUserId(User))
-            {
-                <a asp-controller="Garage" asp-action="Edit" asp-route-id="@garage.Id" class="btn btn-primary">Edit</a>
-                <a asp-controller="Garage" asp-action="Delete" asp-route-id="@garage.Id" class="btn btn-primary">Delete</a>
-            }
-
-            <a asp-controller="Map" asp-action="SeeOnMap" asp-route-garageId="@garage.Id" class="btn btn-primary">See location on map</a>
-            <a asp-controller="Garage" asp-action="ListVehicles" asp-route-garageId="@garage.Id" class="btn btn-primary">List vehicles</a>
+                    <a asp-controller="Map" asp-action="SeeOnMap" asp-route-garageId="@garage.Id" class="btn btn-secondary mt-2">See location on map</a>
+                    <a asp-controller="Garage" asp-action="ListVehicles" asp-route-garageId="@garage.Id" class="btn btn-secondary mt-2">List vehicles</a>
+                </div>
+            </div>
         </div>
-    </div>
-}
+    }
+</div>
 

@@ -1,4 +1,29 @@
-﻿<div id="map" style="height: 400px;"></div>
+﻿<style>
+    #map-container {
+        height: 90vh; /* 90% of the viewport height */
+        width: 90vw; /* 90% of the viewport width */
+        margin: 0 auto; /* Center the map container horizontally */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #map {
+        height: 100%; /* Fill the entire height of the map container */
+        width: 100%; /* Fill the entire width of the map container */
+    }
+
+    #back-button {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1;
+    }
+</style>
+
+<div id="map-container">
+    <div id="map"></div>
+</div>
 
 <script>
     function initMap() {
@@ -19,3 +44,5 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&callback=initMap" async defer></script>
+
+<a id="back-button" href="@Url.Action("Index", "Garage")" class="btn btn-primary">Back to all garages</a>
