@@ -1,0 +1,78 @@
+﻿@model OrderMe.Core.Models.OrderRide.OrderRideForm
+
+<style>
+    .map-container {
+        height: 50vh; /* 50% of the viewport height */
+        width: 90vw; /* 90% of the viewport width */
+        margin: 0 auto; /* Center the map container horizontally */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .map {
+        height: 100%; /* Fill the entire height of the map container */
+        width: 100%; /* Fill the entire width of the map container */
+    }
+
+    #back-button {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 1;
+    }
+</style>
+
+<h2>Order Ride</h2>
+
+<div class="map-container">
+    <div id="pickup-map" class="map"></div>
+</div>
+
+<div class="map-container">
+    <div id="dropoff-map" class="map"></div>
+</div>
+
+<form asp-controller="OrderRide" asp-action="OrderRide" method="post">
+    <input type="hidden" asp-for="DriverId" />
+    <input type="hidden" asp-for="VehicleId" />
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <label>Pickup Location</label>
+        <input id="pickup-location" name="pickupLocation" class="form-control" placeholder="Enter pickup location" required />
+    </div>
+
+    <div class="form-group">
+        <label>Drop-off Location</label>
+        <input id="dropoff-location" name="dropoffLocation" class="form-control" placeholder="Enter drop-off location" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Order</button>
+</form>
+
+@section Scripts {
+    <script>
+        function initMap() {
+            // Initialize map for pickup location
+            const pickupMap = new google.maps.Map(document.getElementById('pickup-map'), {
+                center: { lat: 42, lng: 23},
+                zoom: 12
+            });
+            const pickupInput = document.getElementById('pickup-location');
+            const pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+            pickupAutocomplete.bindTo('bounds', pickupMap);
+
+            // Initialize map for drop-off location
+            const dropoffMap = new google.maps.Map(document.getElementById('dropoff-map'), {
+                center: { lat: 42, lng: 23 },
+                zoom: 12
+            });
+            const dropoffInput = document.getElementById('dropoff-location');
+            const dropoffAutocomplete = new google.maps.places.Autocomplete(dropoffInput);
+            dropoffAutocomplete.bindTo('bounds', dropoffMap);
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&libraries=places&callback=initMap" async defer></script>
+}

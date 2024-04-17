@@ -16,6 +16,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IMenuItemService, MenuItemService>();
+            services.AddScoped<IOrderRideService, OrderRideService>();
+           // services.AddScoped<IDriverService>(); // does not have a service (used only as a basic interface inside the user controller)
 
             return services;
         }
