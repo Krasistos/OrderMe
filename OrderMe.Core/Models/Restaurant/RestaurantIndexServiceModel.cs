@@ -1,5 +1,4 @@
-﻿using OrderMe.Infrastructure.Data.Models;
-
+﻿
 namespace OrderMe.Core.Models.Restaurant
 {
     public class RestaurantIndexServiceModel
@@ -14,6 +13,5 @@ namespace OrderMe.Core.Models.Restaurant
         public bool IsActive { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public List<MenuItem> MenuItems { get; set; }
     }
 }

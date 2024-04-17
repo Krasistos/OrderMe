@@ -21,7 +21,7 @@
                     }
 
                     <a asp-controller="Map" asp-action="SeeRestaurantOnMap" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">See location on map</a>
-                    <a asp-controller="Restaurant" asp-action="List meals" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">List meals</a>
+                    <a asp-controller="MenuItem" asp-action="Index" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">List meals</a>
                 </div>
             </div>
         </div>

@@ -8,12 +8,9 @@
 
         public const string LicenseLengthMessage = "The field {0} must be {1} characters long";
 
-        public const string PhoneExists = "Phone number already exists. Enter another one";
+        public const string PriceMessage = "The field {0} must be a number between {1} and {2}";
 
-        public const string HasRents = "You should have no rents to become an agent";
+        public const string QuantityMessage = "The field {0} must be a number between {1} and {2}";
 
-        public const string UserMessageSuccess = "UserMessageSuccess";
-
-        public const string UserMessageError = "UserMessageError";
     }
 }

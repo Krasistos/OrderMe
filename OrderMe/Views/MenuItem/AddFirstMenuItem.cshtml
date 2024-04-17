@@ -1,0 +1,15 @@
+﻿@using OrderMe.Core.Contracts
+@model int
+@inject IRestaurantService restaurantService
+
+<div class="text-center">
+    <h2>No MenuItems found in this garage.</h2>
+    @if (restaurantService.GetRestaurantByIdAsync(Model).Result.UserId == User.Id())
+    {
+        <a asp-controller="MenuItem" asp-action="AddMenuItem" asp-route-restaurantId="@Model" class="btn btn-primary">Add MenuItem</a>
+    }
+    else
+    {
+        <h1>You do not own this restaurant, neither are you an admin</h1>
+    }
+</div>

@@ -306,7 +306,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
 
                     b.HasComment("Cart");
 
@@ -344,7 +344,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Drivers");
+                    b.ToTable("Drivers", (string)null);
 
                     b.HasComment("Driver");
 
@@ -405,7 +405,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("FoodOrders");
+                    b.ToTable("FoodOrders", (string)null);
 
                     b.HasComment("Food Order");
                 });
@@ -452,7 +452,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Garages");
+                    b.ToTable("Garages", (string)null);
 
                     b.HasComment("Garage");
 
@@ -515,7 +515,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("RestaurantId");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItems", (string)null);
 
                     b.HasComment("Menu Item");
 
@@ -549,7 +549,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderMeAgency");
+                    b.ToTable("OrderMeAgency", (string)null);
 
                     b.HasComment("OrderMe Agency");
 
@@ -603,7 +603,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Restaurants");
+                    b.ToTable("Restaurants", (string)null);
 
                     b.HasComment("Restaurant");
 
@@ -663,7 +663,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("RideOrders");
+                    b.ToTable("RideOrders", (string)null);
 
                     b.HasComment("Ride Order");
                 });
@@ -716,7 +716,7 @@ namespace OrderMe.Infrastructure.Migrations
 
                     b.HasIndex("GarageId");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Vehicles", (string)null);
 
                     b.HasComment("Vehicle");
 
