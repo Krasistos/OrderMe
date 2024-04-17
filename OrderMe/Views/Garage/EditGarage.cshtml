@@ -1,10 +1,10 @@
-﻿@model RestaurantRegistrationViewModel
+﻿@model GarageRegistrationViewModel
 
-<h2>Register New Restaurant</h2>
+<h2>Register New Garage</h2>
 
-<form asp-controller="restaurant" asp-action="Registerrestaurant" method="post">
+<form asp-controller="Garage" asp-action="RegisterGarage" method="post">
     <div class="form-group">
-        <label for="name">restaurant Name:</label>
+        <label for="name">Garage Name:</label>
         <input type="text" id="name" name="Name" class="form-control" required />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
@@ -14,10 +14,17 @@
     <input type="hidden" id="longitude" name="Longitude" />
 
     <div class="form-check">
-        <input type="checkbox" id="isActive" name="IsActive" class="form-check-input" value="true" />
+        <input type="checkbox" id="isActive" name="IsActive" class="form-check-input"
+               value="true" @(Model.IsActive ? "checked" : "") />
         <label class="form-check-label" for="isActive">Is Active</label>
+        <span asp-validation-for="IsActive" class="text-danger"></span>
+
         <input type="hidden" name="IsActive" value="false" /> <!-- Hidden field for false value -->
     </div>
 
-    <button type="submit" class="btn btn-primary">Register restaurant</button>
+    <button type="submit" class="btn btn-primary">Register Garage</button>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

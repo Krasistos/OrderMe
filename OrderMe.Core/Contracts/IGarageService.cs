@@ -7,10 +7,9 @@ namespace OrderMe.Core.Contracts
     public interface IGarageService
     {
         Task<IEnumerable<GarageIndexServiceModel>> AllGaragesAsync();
-        Task<IEnumerable<VehicleIndexServiceModel>> AllVehiclesOfGarageAsync(int garageId);
-        Task<GarageIndexServiceModel> GetGarageByIdAsync(int garageId);
+        Task<Garage> GetGarageByIdAsync(int garageId);
         Task CreateGarageAsync(GarageRegistrationViewModel model,string userId);
-        Task<int> UpdateGarageAsync(Garage garage);
-        Task<int> DeleteGarageAsync(int id);
+        Task<int> UpdateGarageAsync(GarageEditViewModel garage);
+        Task DeleteGarageAsync(int id);
     }
 }

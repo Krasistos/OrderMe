@@ -6,6 +6,7 @@
     <div class="form-group">
         <label for="name">Garage Name:</label>
         <input type="text" id="name" name="Name" class="form-control" required />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div id="map" style="height: 400px;"></div>
@@ -20,3 +21,8 @@
 
     <button type="submit" class="btn btn-primary">Register Garage</button>
 </form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

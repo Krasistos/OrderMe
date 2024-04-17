@@ -11,7 +11,7 @@
         if(User.IsAdmin()){
         @foreach (var vehicle in garage.Vehicles)
         {
-            <h1>@vehicle.GargeId,@vehicle.Make</h1>
+            <h1>@vehicle.GarageId,@vehicle.Make</h1>
             <img src="data:image/jpeg;base64,@Convert.ToBase64String(vehicle.ImageData)" alt="Image" />
             }
         }

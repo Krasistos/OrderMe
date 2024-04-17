@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OrderMe.Core.Contracts;
 using OrderMe.Core.Models.Restaurant;
 
@@ -30,6 +31,10 @@ namespace OrderMe.Controllers
         {
             if (model != null)
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
                 await restaurantService.CreateRestaurantAsync(model, User.Id());
 
                 return RedirectToAction(nameof(Index));
@@ -42,20 +47,54 @@ namespace OrderMe.Controllers
             }
         }
 
-        public async Task<IActionResult> ListMeals(int id)
+        [HttpGet]
+        public async Task<IActionResult> EditRestaurant(int id)
         {
-            return View();
-            // return View(await restaurantService.AllMealsOfRestaurantAsync(id));
+            var restaurant = await restaurantService.GetRestaurantByIdAsync(id);
+
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            double[] location = JsonConvert.DeserializeObject < double[]>(restaurant.LocationJson);
+
+            var model = new RestaurantEditViewModel
+            {
+                Id = restaurant.Id,
+                Name = restaurant.Name,
+                Latitude = location[0],
+                Longitude = location[1],
+                IsActive = restaurant.IsActive
+            };
+
+
+            return View(model);
         }
 
-        public async Task<IActionResult> AddMeal(int id)
+        [HttpPost]
+        public async Task<IActionResult> EditRestaurant(RestaurantEditViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await restaurantService.UpdateRestaurantAsync(model);
+
+            return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> EditMeal(int id)
+        public async Task<IActionResult> DeleteRestaurant(int id)
         {
-            return View();
+            if(await restaurantService.GetRestaurantByIdAsync(id) == null)
+            {
+                return NotFound();
+            }
+
+            await restaurantService.DeleteRestaurantAsync(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

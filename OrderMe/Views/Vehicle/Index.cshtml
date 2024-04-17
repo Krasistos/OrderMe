@@ -1,0 +1,43 @@
+﻿@using OrderMe.Core.Contracts
+@inject IGarageService garageService
+@model List<VehicleIndexServiceModel>
+
+<style>
+    .card-img {
+        max-width: 100%; /* Ensure image does not exceed the width of the card */
+        height: auto; /* Maintain aspect ratio */
+        display: block; /* Ensure image does not have any extra spacing */
+        margin-bottom: 15px; /* Add spacing below the image */
+    }
+    </style>
+
+    @if (User.IsAdmin() || garageService.GetGarageByIdAsync(Model.First().GarageId).Result.UserId == User.Id())
+    {
+        <a asp-controller="Vehicle" asp-action="AddVehicle" asp-route-id="@garageService.GetGarageByIdAsync(Model.First().GarageId).Result.Id" class="btn btn-primary mr-2">Add Vehicle To This Garage</a>
+    }
+
+<div class="row">
+    @foreach (var vehicle in Model)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <!-- Adjust column sizes based on screen width -->
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">Vehicle's Make: @vehicle.Make</h5>
+
+                    <!-- Limit size of vehicle image -->
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(vehicle.ImageData)" class="card-img" />
+
+                    <p class="card-text">Is the vehicle active: @vehicle.IsUsed</p>
+                    <p class="card-text">Date of addition: @vehicle.AddedOn</p>
+
+                    @if (User.IsAdmin() || garageService.GetGarageByIdAsync(Model.First().GarageId).Result.UserId == User.Id())
+                    {
+                        <a asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn btn-primary mr-2">Edit</a>
+                        <a asp-controller="Vehicle" asp-action="DeleteVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -2,11 +2,11 @@
 using static OrderMe.Core.Constants.MessageConstants;
 using static OrderMe.Infrastructure.Constants.DataConstants.Restaurant;
 
-
 namespace OrderMe.Core.Models.Restaurant
 {
-    public class RestaurantRegistrationViewModel
+    public class RestaurantEditViewModel
     {
+        public int Id { get; set; }
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, ErrorMessage = LengthMessage)]
         public string Name { get; set; }

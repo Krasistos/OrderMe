@@ -16,12 +16,12 @@
 
                     @if (User.IsAdmin() || garage.UserId == UserManager.GetUserId(User))
                     {
-                        <a asp-controller="Garage" asp-action="Edit" asp-route-id="@garage.Id" class="btn btn-primary mr-2">Edit</a>
-                        <a asp-controller="Garage" asp-action="Delete" asp-route-id="@garage.Id" class="btn btn-danger">Delete</a>
+                        <a asp-controller="Garage" asp-action="EditGarage" asp-route-id="@garage.Id" class="btn btn-primary mr-2">Edit</a>
+                        <a asp-controller="Garage" asp-action="DeleteGarage" asp-route-id="@garage.Id" class="btn btn-danger">Delete</a>
                     }
 
-                    <a asp-controller="Map" asp-action="SeeOnMap" asp-route-garageId="@garage.Id" class="btn btn-secondary mt-2">See location on map</a>
-                    <a asp-controller="Garage" asp-action="ListVehicles" asp-route-garageId="@garage.Id" class="btn btn-secondary mt-2">List vehicles</a>
+                    <a asp-controller="Map" asp-action="SeeGarageOnMap" asp-route-garageId="@garage.Id" class="btn btn-secondary mt-2">See location on map</a>
+                    <a asp-controller="Vehicle" asp-action="Index" asp-route-garageId="@garage.Id" class="btn btn-secondary mt-2">List vehicles</a>
                 </div>
             </div>
         </div>

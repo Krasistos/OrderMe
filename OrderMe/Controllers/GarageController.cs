@@ -5,6 +5,7 @@ using OrderMe.Core.Models.Garage;
 using OrderMe.Infrastructure.Data;
 using OrderMe.Infrastructure.Data.Models;
 using System.Security.Claims;
+using System.Transactions;
 
 namespace OrderMe.Controllers
 {
@@ -31,11 +32,15 @@ namespace OrderMe.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>RegisterGarage(GarageRegistrationViewModel model)
+        public async Task<IActionResult> RegisterGarage(GarageRegistrationViewModel model)
         {
             if (model != null)
             {
-                await garageService.CreateGarageAsync(model,User.Id());
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                await garageService.CreateGarageAsync(model, User.Id());
 
                 return RedirectToAction(nameof(Index));
             }
@@ -46,6 +51,63 @@ namespace OrderMe.Controllers
                 return View(model);
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EditGarage(int id)
+        {
+            var garage = await garageService.GetGarageByIdAsync(id);
+
+            if (garage == null)
+            {
+                return NotFound();
+            }
+
+            double[] location = JsonConvert.DeserializeObject<double[]>(garage.LocationJson);
+
+
+            var model = new GarageEditViewModel
+            {
+                Id = garage.Id,
+                Name = garage.Name,
+                Latitude = location[0],
+                Longitude = location[1],
+                IsActive = garage.IsActive
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditGarage(GarageEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // If model validation fails, return the view with validation errors
+                return View(model);
+            }
+
+            await garageService.UpdateGarageAsync(model);
+
+            // Redirect to the garage index or details page after successful update
+            return RedirectToAction("Index", "Garage");
+
+        }
+
+
+
+        public async Task<IActionResult> DeleteGarage(int id)
+        {
+
+            if (await garageService.GetGarageByIdAsync(id) == null)
+            {
+                return NotFound();
+            }
+
+            await garageService.DeleteGarageAsync(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
         public async Task<IActionResult> ListVehicles(int id)
         {

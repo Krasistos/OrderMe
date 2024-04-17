@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using NuGet.Protocol;
 using OrderMe.Core.Contracts;
 
@@ -8,9 +9,11 @@ namespace OrderMe.Controllers
     {
 
         private readonly IGarageService garageService;
-        public MapController(IGarageService _garageService)
+        private readonly IRestaurantService restaurantServ;
+        public MapController(IGarageService _garageService, IRestaurantService restaurantServ)
         {
             this.garageService = _garageService;
+            this.restaurantServ = restaurantServ;
         }
         public IActionResult Index()
         {
@@ -22,18 +25,47 @@ namespace OrderMe.Controllers
 
         //}
 
-        public async Task<IActionResult> SeeOnMap(int garageId)
+        public async Task<IActionResult> SeeGarageOnMap(int garageId)
         {
 
             var garage = await garageService.GetGarageByIdAsync(garageId);
+            if(garage == null)
+            {
+                return NotFound();
+            }
 
-            if (garage == null || garage.Location == null || garage.Location.Length != 2)
+            double[] location = JsonConvert.DeserializeObject < double[]>(garage.LocationJson);
+
+
+            if (garage == null || location ==null || location.Length != 2)
             {
                 return BadRequest();
             }
 
-            ViewBag.Latitude = garage.Location[0];
-            ViewBag.Longitude = garage.Location[1];
+            ViewBag.Latitude = location[0];
+            ViewBag.Longitude = location[1];
+            return PartialView("_MapPartial"); // Return the partial view for the map
+        }
+
+        public async Task<IActionResult> SeeRestaurantOnMap(int restaurantId)
+        {
+
+            var restaurant = await restaurantServ.GetRestaurantByIdAsync(restaurantId);
+            if (restaurant == null)
+            {
+                return NotFound();
+            }
+
+            double[] location = JsonConvert.DeserializeObject<double[]>(restaurant.LocationJson);
+
+
+            if (restaurant == null || location == null || location.Length != 2)
+            {
+                return BadRequest();
+            }
+
+            ViewBag.Latitude = location[0];
+            ViewBag.Longitude = location[1];
             return PartialView("_MapPartial"); // Return the partial view for the map
         }
     }

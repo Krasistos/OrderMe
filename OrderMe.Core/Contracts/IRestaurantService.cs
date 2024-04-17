@@ -8,7 +8,9 @@ namespace OrderMe.Core.Contracts
     {
         Task<IEnumerable<RestaurantIndexServiceModel>> AllRestaurantsAsync();
         Task CreateRestaurantAsync(RestaurantRegistrationViewModel model, string userId);
-        Task<int> UpdateRestaurantAsync(Restaurant garage);
-        Task<int> DeleteRestaurantAsync(int id);
+        Task<int> UpdateRestaurantAsync(RestaurantEditViewModel garage);
+        Task DeleteRestaurantAsync(int id);
+        Task<Restaurant> GetRestaurantByIdAsync(int restaurantId);
+
     }
 }

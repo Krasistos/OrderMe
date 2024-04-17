@@ -34,24 +34,10 @@ namespace OrderMe.Core.Services
                 }).ToListAsync();
         }
 
-        public Task<IEnumerable<VehicleIndexServiceModel>> AllVehiclesOfGarageAsync(int garageId)
-        {
-            throw new NotImplementedException();
-        }
 
-        public async Task<GarageIndexServiceModel> GetGarageByIdAsync(int garageId)
+        public async Task<Garage> GetGarageByIdAsync(int garageId)
         {
-            var garage = await repository.GetByIdAsync<Garage>(garageId);
-
-            return new GarageIndexServiceModel
-            {
-                Id = garage.Id,
-                UserId = garage.UserId,
-                Name = garage.Name,
-                Location = JsonConvert.DeserializeObject<double[]>(garage.LocationJson),
-                IsActive = garage.IsActive,
-                CreationDate = garage.CreationDate,
-            };
+            return await repository.GetByIdAsync<Garage>(garageId);
         }
 
 
@@ -70,9 +56,9 @@ namespace OrderMe.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateGarageAsync(Garage garage)
+        public async Task<int> UpdateGarageAsync(GarageEditViewModel model)
         {
-            var existingGarage = await repository.GetByIdAsync<Garage>(garage.Id);
+            var existingGarage = await repository.GetByIdAsync<Garage>(model.Id);
 
             if (existingGarage == null)
             {
@@ -80,10 +66,9 @@ namespace OrderMe.Core.Services
                 return 0; // Or throw an exception, handle as needed
             }
 
-            // Update properties of the existing garage entity
-            existingGarage.Name = garage.Name;
-            existingGarage.LocationJson = garage.LocationJson;
-            existingGarage.IsActive = garage.IsActive;
+            existingGarage.Name = model.Name;
+            existingGarage.IsActive = model.IsActive;
+            existingGarage.LocationJson = JsonConvert.SerializeObject(new double[] { model.Latitude, model.Longitude });
 
             // No need to explicitly call _repository.Update(existingGarage)
             // EF Core change tracking will mark the entity as modified
@@ -91,10 +76,10 @@ namespace OrderMe.Core.Services
             return await repository.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteGarageAsync(int id)
+        public async Task DeleteGarageAsync(int id)
         {
             await repository.DeleteAsync<Garage>(id);
-            return await repository.SaveChangesAsync();
+            await repository.SaveChangesAsync();
         }
     }
 }

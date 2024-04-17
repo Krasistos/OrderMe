@@ -45,14 +45,32 @@ namespace OrderMe.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public Task<int> DeleteRestaurantAsync(int id)
+        public async Task DeleteRestaurantAsync(int id)
         {
-            throw new NotImplementedException();
+           await repository.DeleteAsync<Restaurant>(id);
+            await repository.SaveChangesAsync();
         }
 
-        public Task<int> UpdateRestaurantAsync(Restaurant restaurant)
+        public async Task<Restaurant> GetRestaurantByIdAsync(int restaurantId)
         {
-            throw new NotImplementedException();
+           return await repository.GetByIdAsync<Restaurant>(restaurantId);
         }
+
+        public async Task<int> UpdateRestaurantAsync(RestaurantEditViewModel restaurant)
+        {
+          var existingRestaurant = await repository.GetByIdAsync<Restaurant>(restaurant.Id);
+
+            if (existingRestaurant == null)
+            {
+                throw new InvalidOperationException("Restaurant not found");
+            }
+
+            existingRestaurant.Name = restaurant.Name;
+            existingRestaurant.LocationJson = JsonConvert.SerializeObject(new double[] { restaurant.Latitude, restaurant.Longitude });
+            existingRestaurant.IsActive = restaurant.IsActive;
+
+            return await repository.SaveChangesAsync();
+        }
+
     }
 }

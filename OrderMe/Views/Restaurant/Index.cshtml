@@ -16,11 +16,11 @@
 
                     @if (User.IsAdmin() || restaurant.UserId == UserManager.GetUserId(User))
                     {
-                        <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@restaurant.Id" class="btn btn-primary mr-2">Edit</a>
-                        <a asp-controller="Restaurant" asp-action="Delete" asp-route-id="@restaurant.Id" class="btn btn-danger">Delete</a>
+                        <a asp-controller="Restaurant" asp-action="EditRestaurant" asp-route-id="@restaurant.Id" class="btn btn-primary mr-2">Edit</a>
+                        <a asp-controller="Restaurant" asp-action="DeleteRestaurant" asp-route-id="@restaurant.Id" class="btn btn-danger">Delete</a>
                     }
 
-                    <a asp-controller="Map" asp-action="SeeOnMap" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">See location on map</a>
+                    <a asp-controller="Map" asp-action="SeeRestaurantOnMap" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">See location on map</a>
                     <a asp-controller="Restaurant" asp-action="List meals" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">List meals</a>
                 </div>
             </div>

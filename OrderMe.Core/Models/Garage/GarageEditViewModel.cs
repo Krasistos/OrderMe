@@ -5,10 +5,12 @@ using static OrderMe.Infrastructure.Constants.DataConstants.Garage;
 
 namespace OrderMe.Core.Models.Garage
 {
-    public class GarageRegistrationViewModel
+    public class GarageEditViewModel
     {
+        public int Id { get; set; }
+
         [Required(ErrorMessage = RequiredMessage)]
-       [StringLength(NameMaxLength,MinimumLength = NameMinLength,ErrorMessage = LengthMessage)]
+        [StringLength(NameMaxLength,MinimumLength =NameMinLength, ErrorMessage = LengthMessage)]
         public string Name { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
@@ -16,3 +18,4 @@ namespace OrderMe.Core.Models.Garage
 
     }
 }
+
