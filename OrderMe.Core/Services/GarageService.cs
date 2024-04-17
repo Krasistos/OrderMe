@@ -56,14 +56,13 @@ namespace OrderMe.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateGarageAsync(GarageEditViewModel model)
+        public async Task UpdateGarageAsync(GarageEditViewModel model)
         {
             var existingGarage = await repository.GetByIdAsync<Garage>(model.Id);
 
             if (existingGarage == null)
             {
-                // Garage not found
-                return 0; // Or throw an exception, handle as needed
+                throw new InvalidOperationException("Garge not found");
             }
 
             existingGarage.Name = model.Name;
@@ -73,7 +72,7 @@ namespace OrderMe.Core.Services
             // No need to explicitly call _repository.Update(existingGarage)
             // EF Core change tracking will mark the entity as modified
 
-            return await repository.SaveChangesAsync();
+             await repository.SaveChangesAsync();
         }
 
         public async Task DeleteGarageAsync(int id)

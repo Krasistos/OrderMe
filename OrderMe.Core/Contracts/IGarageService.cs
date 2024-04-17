@@ -9,7 +9,7 @@ namespace OrderMe.Core.Contracts
         Task<IEnumerable<GarageIndexServiceModel>> AllGaragesAsync();
         Task<Garage> GetGarageByIdAsync(int garageId);
         Task CreateGarageAsync(GarageRegistrationViewModel model,string userId);
-        Task<int> UpdateGarageAsync(GarageEditViewModel garage);
+        Task UpdateGarageAsync(GarageEditViewModel garage);
         Task DeleteGarageAsync(int id);
     }
 }

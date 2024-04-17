@@ -11,6 +11,9 @@
     }
     </style>
 
+@if (Model.Count() != 0)
+{
+
     @if (User.IsAdmin() || garageService.GetGarageByIdAsync(Model.First().GarageId).Result.UserId == User.Id())
     {
         <a asp-controller="Vehicle" asp-action="AddVehicle" asp-route-id="@garageService.GetGarageByIdAsync(Model.First().GarageId).Result.Id" class="btn btn-primary mr-2">Add Vehicle To This Garage</a>
@@ -41,3 +44,8 @@
         </div>
     }
 </div>
+}
+else
+{
+    <h2>No vehicles found in this garage.</h2>
+}
