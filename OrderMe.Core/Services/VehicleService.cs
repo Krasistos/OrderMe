@@ -34,7 +34,7 @@ namespace OrderMe.Core.Services
                 }).ToListAsync();
         }
 
-        public async Task CreateVehicleAsync(VehicleRegistrationViewModel model, int garageId)
+        public async Task CreateVehicleAsync(AddVehicleViewModel model)
         {
             byte[] imageData = await GetImageDataAsync(model.ImageFile);
 
@@ -46,7 +46,7 @@ namespace OrderMe.Core.Services
                 ImageData = imageData,
                 IsUsed = false,
                 AddedOn = DateTime.Now,
-                GarageId = garageId
+                GarageId = model.GarageId
             };
 
             await repository.AddAsync(vehicle);

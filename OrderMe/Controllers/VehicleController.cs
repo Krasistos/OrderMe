@@ -14,39 +14,99 @@ namespace OrderMe.Controllers
         }
         public async Task<IActionResult> Index(int garageId)
         {
+            var vehicles = vehicleService.AllVehiclesOfGarageAsync(garageId).Result.ToList();
 
-
-
-            return View(await vehicleService.AllVehiclesOfGarageAsync(garageId));
+            if (vehicles.Count != 0)
+            {
+                return View(await vehicleService.AllVehiclesOfGarageAsync(garageId));
+            }
+            else
+            {
+                return View("AddFirstVehicle", garageId );
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> AddVehicle(int garageId)
         {
-            return View(garageId);
+            return View(new AddVehicleViewModel { GarageId = garageId });
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddVehicle(VehicleRegistrationViewModel model, int garageId)
+        public async Task<IActionResult> AddVehicle(AddVehicleViewModel modelD)
         {
-            if (model != null)
+            if (modelD != null)
             {
                 if (!ModelState.IsValid)
                 {
-                    return View(model);
+                    return View(modelD);
                 }
 
-                await vehicleService.CreateVehicleAsync(model, garageId);
+                await vehicleService.CreateVehicleAsync(modelD);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), "Garage", 1);
             }
             else
             {
                 ModelState.AddModelError("Location", "Invalid location format");
-                return View(model);
+                return View(modelD);
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditVehicle(int id)
+        {
+            var vehicle = await vehicleService.GetVehicleByIdAsync(id);
 
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+            var modelD = new VehicleEditViewModel
+            {
+                Id = vehicle.Id,
+                Make = vehicle.Make,
+                Model = vehicle.Model,
+                LicensePlate = vehicle.LicensePlate,
+                ImageFile = vehicle.ImageFile,
+                IsUsed = vehicle.IsUsed,
+                GarageId = vehicle.GarageId
+            };
+
+            return View(modelD);
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> EditVehicle(VehicleEditViewModel modelD)
+        {
+            if (modelD != null)
+            {
+                if (!ModelState.IsValid)
+                {
+                    return View(modelD);
+                }
+
+                await vehicleService.UpdateVehicleAsync(modelD);
+
+                return RedirectToAction(nameof(Index), "Garage", 1);
+            }
+            else
+            {
+                return View(modelD);
+            }
+        }
+
+        public async Task<IActionResult> DeleteVehicle(int id)
+        {
+            if (await vehicleService.GetVehicleByIdAsync(id) == null)
+            {
+                return NotFound();
+            }
+
+            await vehicleService.DeleteVehicleAsync(id);
+
+            return RedirectToAction(nameof(Index), "Garage", 1);
+        }
     }
 }

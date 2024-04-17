@@ -44,7 +44,7 @@ namespace OrderMe.Controllers
 
             ViewBag.Latitude = location[0];
             ViewBag.Longitude = location[1];
-            return PartialView("_MapPartial"); // Return the partial view for the map
+            return PartialView("_MapPartialGarage"); // Return the partial view for the map
         }
 
         public async Task<IActionResult> SeeRestaurantOnMap(int restaurantId)
@@ -66,7 +66,7 @@ namespace OrderMe.Controllers
 
             ViewBag.Latitude = location[0];
             ViewBag.Longitude = location[1];
-            return PartialView("_MapPartial"); // Return the partial view for the map
+            return PartialView("_MapPartialRestaurant"); // Return the partial view for the map
         }
     }
 }

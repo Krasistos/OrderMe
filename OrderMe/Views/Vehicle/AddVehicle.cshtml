@@ -1,31 +1,36 @@
-﻿@model VehicleRegistrationViewModel
+﻿@model AddVehicleViewModel
 
 <h2>Add New Vehicle</h2>
 
 <form asp-controller="Vehicle" asp-action="AddVehicle" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="GarageId" /> <!-- This hidden input will hold the GarageId -->
+
     <div class="form-group">
-        <label for="make">Make:</label>
-        <input type="text" id="make" name="Make" class="form-control" value="@Model.Make" required />
+        <label asp-for="Make">Vehicle Make:</label>
+        <input asp-for="Make" class="form-control" />
         <span asp-validation-for="Make" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label for="model">Model:</label>
-        <input type="text" id="model" name="Model" class="form-control" value="@Model.Model" required />
+        <label asp-for="Model">Vehicle Model:</label>
+        <input asp-for="Model" class="form-control" />
         <span asp-validation-for="Model" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label for="licensePlate">License Plate:</label>
-        <input type="text" id="licensePlate" name="LicensePlate" class="form-control" value="@Model.LicensePlate" required />
+        <label asp-for="LicensePlate">License Plate:</label>
+        <input asp-for="LicensePlate" class="form-control" />
         <span asp-validation-for="LicensePlate" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label for="imageFile">Upload Image:</label>
-        <input type="file" id="imageFile" name="ImageFile" class="form-control-file" accept="image/*" required />
+        <label asp-for="ImageFile">Vehicle Image:</label>
+        <input asp-for="ImageFile" type="file" class="form-control-file" accept="image/*" />
         <span asp-validation-for="ImageFile" class="text-danger"></span>
     </div>
+
+    <!-- Display the GarageId for debugging (optional) -->
+    <p>GarageId: @Model.GarageId</p>
 
     <button type="submit" class="btn btn-primary">Add Vehicle</button>
 </form>

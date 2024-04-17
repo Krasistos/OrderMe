@@ -38,12 +38,11 @@
         var marker = new google.maps.Marker({
             position: { lat: latitude, lng: longitude },
             map: map,
-            title: 'Garage Location'
+            title: 'Restaurant Location'
         });
     }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&callback=initMap" async defer></script>
 
-
-<a id="back-button" href="@Url.Action("Index", "Garage")" class="btn btn-primary">Back to all garages</a>
+<a id="back-button" href="@Url.Action("Index", "Restaurant")" class="btn btn-primary">Back to all restaurants</a>

@@ -1,0 +1,10 @@
+﻿@model int // This is the GarageId
+
+@{
+    ViewData["Title"] = "No Vehicles Found";
+}
+
+<div class="text-center">
+    <h2>No vehicles found in this garage.</h2>
+    <a asp-controller="Vehicle" asp-action="AddVehicle" asp-route-garageId="@Model" class="btn btn-primary">Add Vehicle</a>
+</div>

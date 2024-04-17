@@ -16,7 +16,7 @@
 
     @if (User.IsAdmin() || garageService.GetGarageByIdAsync(Model.First().GarageId).Result.UserId == User.Id())
     {
-        <a asp-controller="Vehicle" asp-action="AddVehicle" asp-route-id="@garageService.GetGarageByIdAsync(Model.First().GarageId).Result.Id" class="btn btn-primary mr-2">Add Vehicle To This Garage</a>
+        <a asp-controller="Vehicle" asp-action="AddVehicle" asp-route-garageId="@garageService.GetGarageByIdAsync(Model.First().GarageId).Result.Id" class="btn btn-primary mr-2">Add Vehicle To This Garage</a>
     }
 
 <div class="row">

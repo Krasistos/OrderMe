@@ -7,7 +7,7 @@ namespace OrderMe.Core.Contracts
     {
         Task<IEnumerable<VehicleIndexServiceModel>> AllVehiclesOfGarageAsync(int garageId);
         Task<Vehicle> GetVehicleByIdAsync(int vehicleId);
-        Task CreateVehicleAsync(VehicleRegistrationViewModel model,int garageId);
+        Task CreateVehicleAsync(AddVehicleViewModel model);
         Task UpdateVehicleAsync(VehicleEditViewModel vehicle);
         Task DeleteVehicleAsync(int id);
 
