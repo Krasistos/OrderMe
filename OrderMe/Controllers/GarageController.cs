@@ -12,13 +12,10 @@ namespace OrderMe.Controllers
     {
         private readonly IGarageService garageService;
 
-        private readonly ApplicationDbContext context;
 
-        public GarageController(IGarageService _garageService
-            ,ApplicationDbContext _context)
+        public GarageController(IGarageService _garageService)
         {
             this.garageService = _garageService;
-            context = _context;
         }
 
         public async Task<IActionResult> Index()

@@ -1,0 +1,30 @@
+﻿@using OrderMe.Core.Models.Restaurant
+@model List<RestaurantIndexServiceModel>
+
+<div class="row">
+    @foreach (var restaurant in Model)
+    {
+        var user = UserManager.FindByIdAsync(restaurant.UserId).Result;
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <!-- Adjust column sizes based on screen width -->
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-title">restaurant's name: @restaurant.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Owner's full name: @user.FirstName @user.LastName</h6>
+                    <p class="card-text">Is the restaurant active: @restaurant.IsActive</p>
+                    <p class="card-text">Date of creation: @restaurant.CreationDate</p>
+
+                    @if (User.IsAdmin() || restaurant.UserId == UserManager.GetUserId(User))
+                    {
+                        <a asp-controller="Restaurant" asp-action="Edit" asp-route-id="@restaurant.Id" class="btn btn-primary mr-2">Edit</a>
+                        <a asp-controller="Restaurant" asp-action="Delete" asp-route-id="@restaurant.Id" class="btn btn-danger">Delete</a>
+                    }
+
+                    <a asp-controller="Map" asp-action="SeeOnMap" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">See location on map</a>
+                    <a asp-controller="Restaurant" asp-action="List meals" asp-route-restaurantId="@restaurant.Id" class="btn btn-secondary mt-2">List meals</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
