@@ -21,8 +21,6 @@ namespace OrderMe.Infrastructure.Data.SeedDb
 
         public MenuItem MenuItem { get; set; }
 
-        public OrderMeAgency OrderMeAgency { get; set; }
-
         public Restaurant Restaurant { get; set; }
 
         public Vehicle Vehicle { get; set; }
@@ -34,7 +32,6 @@ namespace OrderMe.Infrastructure.Data.SeedDb
             SeedCart();
             SeedDriver();
             SeedMenuItem();
-            SeedOrderMeAgency();
             SeedVehicle();
             SeedRestaurant();
             SeedGarage();
@@ -63,7 +60,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 UserId = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e"
             };
 
-            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "Kurzaushev098@");
+            GuestUser.PasswordHash = hasher.HashPassword(GuestUser, "guest098@KD(JM+KF*@");
             GuestUser.EmailConfirmed = true;
 
 
@@ -86,7 +83,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 ClaimValue = "Great Admin"
             };
 
-            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin123");
+            AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "admin:L*(03[vjg");
             AdminUser.EmailConfirmed = true;
 
         }
@@ -109,11 +106,6 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 , LocationArray = new double[] { 42.713754697211016, 23.302001953125 }
                 , IsActive = true, CreationDate = DateTime.UtcNow 
             };
-        }
-
-        private void SeedOrderMeAgency()
-        {
-            OrderMeAgency = new OrderMeAgency { Id = 1, Name = "Krasi's Agency" };
         }
 
         private void SeedRestaurant()
@@ -150,7 +142,7 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 , LicensePlate = "CB 8888 MK"
                 , Make = "Mercedes-Benz"
                 , Model = "AMG GT R"
-                , IsUsed = true
+                , IsUsed = false
                 , AddedOn = DateTime.UtcNow
                 ,ImageData = imageData
                 ,ImageFile = new FormFile(new MemoryStream(imageData), 0, imageData.Length, "ImageFile", "vehicleFirst.jpg")

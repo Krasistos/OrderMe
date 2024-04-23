@@ -19,93 +19,25 @@ namespace OrderMe.Controllers
             userManager = _userManager;
             repository = repos;
         }
-
-        //[HttpPost]
-        //[Route("api/user/register")]
-        //public async Task<IActionResult> Register([FromBody] RegisterModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var user = new ApplicationUser
-        //    {
-        //        UserName = model.Email,
-        //        Email = model.Email,
-        //        FirstName = model.FirstName,
-        //        LastName = model.LastName,
-        //        PhoneNumber = model.PhoneNumber,
-        //        Address = model.Address,
-        //        CreatedAt = DateTime.Now
-        //    };
-
-        //    var result = await _userManager.CreateAsync(user, model.Password);
-
-        //    if (result.Succeeded)
-        //    {
-        //        await _userManager.AddToRoleAsync(user, "Customer");
-
-        //        return Ok(new { message = "User created successfully" });
-        //    }
-
-        //    return BadRequest(new { message = "User creation failed" });
-        //}
-
-        //[HttpPost]
-        //[Route("api/user/login")]
-        //public async Task<IActionResult> Login([FromBody] LoginModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    var user = await _userManager.FindByEmailAsync(model.Email);
-
-        //    if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
-        //    {
-        //        var tokenDescriptor = new SecurityTokenDescriptor
-        //        {
-        //            Subject = new ClaimsIdentity(new Claim[]
-        //            {
-        //                new Claim("UserID", user.Id.ToString())
-        //            }),
-        //            Expires = DateTime.UtcNow.AddDays(1),
-        //            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"])), SecurityAlgorithms.HmacSha256Signature)
-        //        };
-
-        //        var tokenHandler = new JwtSecurityTokenHandler();
-        //        var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-        //        var token = tokenHandler.WriteToken(securityToken);
-
-        //        return Ok(new { token });
-        //    }
-
-        //    return BadRequest(new { message = "Invalid credentials" });
-        //}
-
-        //[HttpGet]
-        //[Route("api/user/profile")]
-        //[Authorize]
         public async Task<IActionResult> Profile()
         {
             var user = await userManager.FindByIdAsync(User.Id());
 
-            //  var driver = await _context.Drivers.FirstOrDefaultAsync(x => x.UserId == user.Id);
+            var driver = await repository.AllReadOnly<Driver>().FirstOrDefaultAsync(x => x.UserId == User.Id());
 
             string firstName = user.FirstName;
             string lastName = user.LastName;
 
-            return Ok(
-                new UserShowProfileViewModel
-                {
-                    FirstName = firstName == null ? " " : user.FirstName,
-                    LastName = lastName == null ? " " : user.LastName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    IsDriver = true
-                });
+            var model = new UserShowProfileViewModel
+            {
+                FirstName = firstName == null ? " " : user.FirstName,
+                LastName = lastName == null ? " " : user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                IsDriver =  driver != null ? true : false
+            };
+
+            return View(model);
         }
 
         //Driver things
@@ -113,7 +45,7 @@ namespace OrderMe.Controllers
         {
             var driver = await repository.AllReadOnly<Driver>().FirstOrDefaultAsync(x => x.UserId == User.Id());
 
-            if(driver != null)
+            if (driver != null)
             {
                 return BadRequest(new { message = "You are already a driver" });
             }
@@ -126,23 +58,7 @@ namespace OrderMe.Controllers
             });
             await repository.SaveChangesAsync();
 
-            var user = await userManager.FindByIdAsync(User.Id());
-
-            //  var driver = await _context.Drivers.FirstOrDefaultAsync(x => x.UserId == user.Id);
-
-            string firstName = user.FirstName;
-            string lastName = user.LastName;
-
-            var profile = new UserShowProfileViewModel
-                {
-                    FirstName = firstName == null ? " " : user.FirstName,
-                    LastName = lastName == null ? " " : user.LastName,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    IsDriver = true
-                };
-
-            return View(nameof(Profile),profile);
+            return RedirectToAction(nameof(Profile));
         }
         public async Task<IActionResult> StopBeing()
         {
@@ -154,22 +70,7 @@ namespace OrderMe.Controllers
                 await repository.SaveChangesAsync();
             }
 
-            var user = await userManager.FindByIdAsync(User.Id());
-
-            //  var driver = await _context.Drivers.FirstOrDefaultAsync(x => x.UserId == user.Id);
-
-            string firstName = user.FirstName;
-            string lastName = user.LastName;
-
-            var profile = new UserShowProfileViewModel
-            {
-                FirstName = firstName == null ? " " : user.FirstName,
-                LastName = lastName == null ? " " : user.LastName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                IsDriver = true
-            };
-            return View(nameof(Profile),profile);
+          return RedirectToAction(nameof(Profile));
         }
     }
 }

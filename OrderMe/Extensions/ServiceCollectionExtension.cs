@@ -17,7 +17,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IVehicleService, VehicleService>();
             services.AddScoped<IMenuItemService, MenuItemService>();
             services.AddScoped<IOrderRideService, OrderRideService>();
-           // services.AddScoped<IDriverService>(); // does not have a service (used only as a basic interface inside the user controller)
 
             return services;
         }
@@ -41,11 +40,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddDefaultIdentity<ApplicationUser>(options =>
                 {
                     options.User.RequireUniqueEmail = true;
-                    options.SignIn.RequireConfirmedAccount = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireUppercase = false;
+                    options.SignIn.RequireConfirmedAccount = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireUppercase = true;
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

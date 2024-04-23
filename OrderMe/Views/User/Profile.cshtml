@@ -14,9 +14,16 @@
                     <p><strong>Email:</strong> @Model.Email</p>
                     <p><strong>Phone Number:</strong> @Model.PhoneNumber</p>
                     <p><strong>Driver Status:</strong> @Model.IsDriver</p>
+                   
+
                 </div>
                 <div class="col-md-6">
                     <!-- You can add more profile details or actions here -->
+                    @if (!Model.IsDriver)
+                    {
+                        <p> If you want to start working as a driver with us click here</p>
+                        <a asp-controller="User" asp-action="Become" class="btn btn-primary">Become a driver</a>
+                    }
                 </div>
             </div>
         </div>

@@ -12,7 +12,6 @@ namespace OrderMe.Core.Models.User
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-
         public bool IsDriver { get; set; }
     }
 }

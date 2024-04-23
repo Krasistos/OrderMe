@@ -13,10 +13,6 @@ namespace OrderMe.Infrastructure.Data
         {
         }
 
-        //Db set with only one record - singleton 
-        public DbSet<OrderMeAgency> OrderMeAgency { get; set; } = null!;
-
-
         public DbSet<Cart> Carts { get; set; } = null!;
         public DbSet<Driver> Drivers { get; set; } = null!;
         public DbSet<FoodOrder> FoodOrders { get; set; } = null!;
@@ -37,7 +33,6 @@ namespace OrderMe.Infrastructure.Data
             builder.ApplyConfiguration(new FoodOrderConfiguration());
             builder.ApplyConfiguration(new GarageConfiguration());
             builder.ApplyConfiguration(new MenuItemConfiguration());
-            builder.ApplyConfiguration(new OrderMeAgencyConfiguration());
             builder.ApplyConfiguration(new RestaurantConfiguration());
             builder.ApplyConfiguration(new RideOrderConfiguration());
             builder.ApplyConfiguration(new VehicleConfiguration());

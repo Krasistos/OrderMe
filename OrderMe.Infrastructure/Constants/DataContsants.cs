@@ -2,8 +2,6 @@
 {
     public static class DataConstants
     {
-        public const int OrderMeAgencyNameMaxLength = 100;
-       
         public const double LocationLatitudeMin = -90;
         public const double LocationLatitudeMax = 90;
 
