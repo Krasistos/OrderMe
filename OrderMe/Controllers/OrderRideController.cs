@@ -13,11 +13,10 @@ namespace OrderMe.Controllers
             this.orderRideService = orderRideService;
         }
         [HttpGet]
-        public async Task<IActionResult> OrderRide()
+        public async Task<IActionResult> SubmitOrder()
         {
             //find driver and vehicle
             var driver = orderRideService.GetFreeDriver().Result;
-
             var vehicle = orderRideService.GetFreeVehicle().Result;
 
 
@@ -27,12 +26,12 @@ namespace OrderMe.Controllers
             }
 
             
-            return View("OrderRide", new OrderRideForm { DriverId = driver.Id, VehicleId = vehicle.Id });
+            return View("SubmitOrder", new OrderRideForm { DriverId = driver.Id, VehicleId = vehicle.Id });
         }
 
         [HttpPost]
 
-        public async Task<IActionResult> OrderRide(OrderRideForm model)
+        public async Task<IActionResult> SubmitOrder(OrderRideForm model)
         {
             if (model != null)
             {

@@ -1,0 +1,47 @@
+﻿@model OrderMe.Core.Models.OrderRide.OrderRideForm
+
+<h2>Order Ride</h2>
+
+<form asp-controller="OrderRide" asp-action="SubmitOrder" method="post">
+
+    <input type="hidden" id="DriverId" name="DriverId" value="@Model.DriverId" />
+    <input type="hidden" id="VehicleId" name="VehicleId" value="@Model.VehicleId" />
+    <input type="hidden" id="UserId" name="UserId" value="@User.Id()" />
+
+    <label for="pickupLocation">Pickup Address:</label>
+
+    @if (UserManager.GetUserAsync(User).Result.LocationJson != null)
+    {
+        <p>If you want to be taken from your personal address saved to your account just click here:</p>
+        <div class="form-check">
+            <input type="checkbox" id="usePersonalAddress" name="UsePersonalAddress" class="form-check-input" value="true" />
+            <label class="form-check-label" for="usePersonalAddress">Use Personal Address?</label>
+            <input type="hidden" name="UsePersonalAddress" value="false" /> <!-- Hidden field for false value -->
+        </div>
+    } 
+    else 
+    {
+        <p>Choose pickup location on the map because you address is not set </p>
+    }
+
+    <div id="pickupMap" style="height: 400px;"></div>
+    <input type="hidden" id="latitudePick" name="LatitudePick" />
+    <input type="hidden" id="longitudePick" name="LongitudePick" />
+
+    <label for="pickupLocation">Drop Off Address:</label>
+
+    <div id="dropoffMap" style="height: 400px;"></div>
+    <input type="hidden" id="latitudeDrop" name="LatitudeDrop" />
+    <input type="hidden" id="longitudeDrop" name="LongitudeDrop" />
+
+    <label for="sceduledFor"> Pickup Time:</label>
+    <input type="datetime-local" id="sceduledFor" name="SceduledFor" class="form-control" />
+
+    <button type="submit" class="btn btn-primary">Submit Order</button>
+</form>
+
+<!-- Include site.js script -->
+<script src="~/js/site.js"></script>
+
+<!-- Google Maps API script (with callback to initMap) -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&callback=initTwoMaps" async defer></script>

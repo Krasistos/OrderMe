@@ -2,17 +2,12 @@
 using Newtonsoft.Json;
 using OrderMe.Core.Contracts;
 using OrderMe.Core.Models.Garage;
-using OrderMe.Infrastructure.Data;
-using OrderMe.Infrastructure.Data.Models;
-using System.Security.Claims;
-using System.Transactions;
 
 namespace OrderMe.Controllers
 {
     public class GarageController : BaseController
     {
         private readonly IGarageService garageService;
-
 
         public GarageController(IGarageService _garageService)
         {
@@ -105,28 +100,6 @@ namespace OrderMe.Controllers
             await garageService.DeleteGarageAsync(id);
 
             return RedirectToAction(nameof(Index));
-        }
-
-
-        public async Task<IActionResult> ListVehicles(int id)
-        {
-            return View();
-            // return View(await garageService.AllVehiclesOfGarageAsync(id));
-        }
-
-        public async Task<IActionResult> AddVehicle(int id)
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> EditVehicle(int id)
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> DeleteVehicle(int id)
-        {
-            return View();
         }
     }
 }

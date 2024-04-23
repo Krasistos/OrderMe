@@ -6,11 +6,15 @@
         public int DriverId { get; set; }
         public int VehicleId { get; set; }
 
-        //lat and long
-        public double[] PickupLocationArray { get; set; }
-        public double[] DropOffLocationArray{ get; set; }
+        public double LatitudePick { get; set; }
+        public double LongitudePick { get; set; }
+
+        public double LatitudeDrop { get; set; }
+        public double LongitudeDrop { get; set; }
 
         public DateTime SceduledFor { get; set; }
+
+        public bool UsePersonalAddress { get; set; }
 
     }
 }

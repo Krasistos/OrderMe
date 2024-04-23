@@ -25,4 +25,8 @@
     <ProjectReference Include="..\OrderMe.Core\OrderMe.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Map\" />
+  </ItemGroup>
+
 </Project>

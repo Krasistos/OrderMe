@@ -4,18 +4,21 @@ using OrderMe.Core.Contracts;
 
 public class HomeController : Controller
 {
-    private readonly IGarageService garageService;
-    public HomeController(IGarageService _garageService)
+    private readonly IHomeService homeService;
+    public HomeController(IHomeService homeService)
     {
-        garageService = _garageService;
+        this.homeService = homeService;
     }
+
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-       // return View();
+       return View();
+    }
 
-        var model = await garageService.AllGaragesAsync();
-        return View(model);
-
+    public async Task<IActionResult> RefreshVehiclesAndDrivers()
+    {
+        await homeService.RefreshVehiclesAndDriversAsync();
+        return RedirectToAction(nameof(Index));
     }
 }
