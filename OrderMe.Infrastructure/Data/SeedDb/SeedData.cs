@@ -49,7 +49,8 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 Email = "guest@mail.com",
                 NormalizedEmail = "guest@mail.com",
                 FirstName = "Guest",
-                LastName = "Guestov"
+                LastName = "Guestov",
+                LocationJson = "[43.02, 24.543]"
             };
 
             GuestUserClaim = new IdentityUserClaim<string>()
@@ -72,7 +73,8 @@ namespace OrderMe.Infrastructure.Data.SeedDb
                 Email = "admin@mail.com",
                 NormalizedEmail = "ADMIN@MAIL.COM",
                 FirstName = "Great",
-                LastName = "Admin"
+                LastName = "Admin",
+                LocationJson = "[42.697708, 23.321868]"
             };
 
             AdminUserClaim = new IdentityUserClaim<string>()

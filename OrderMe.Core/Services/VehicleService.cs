@@ -29,6 +29,7 @@ namespace OrderMe.Core.Services
                     Make = v.Make,
                     Model = v.Model,
                     LicensePlate = v.LicensePlate,
+                    AddedOn = v.AddedOn,
                     ImageData = v.ImageData,
                     GarageId = v.GarageId
                 }).ToListAsync();
