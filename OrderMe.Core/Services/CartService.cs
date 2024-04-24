@@ -28,6 +28,11 @@ namespace OrderMe.Core.Services
             await repository.SaveChangesAsync();
         }
 
+        public async Task<Cart> GetCartByIdAsync(int cartId)
+        {
+            return await repository.GetByIdAsync<Cart>(cartId);
+        }
+
         public async Task IncreaseQuantityOfMenuItem(int menuItemId, int cartId)
         {
             var cart = await repository.GetByIdAsync<Cart>(cartId);

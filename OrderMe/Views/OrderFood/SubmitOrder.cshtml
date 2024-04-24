@@ -3,11 +3,13 @@
 
 <h2>Order Food</h2>
 
-<form asp-controller="OrderFood" asp-action="SubmitOrder" method="post">
+<form id="submitOrderForm" method="post">
 
+    <!-- Hidden fields for model properties -->
     <input type="hidden" id="DriverId" name="DriverId" value="@Model.DriverId" />
     <input type="hidden" id="VehicleId" name="VehicleId" value="@Model.VehicleId" />
     <input type="hidden" id="UserId" name="UserId" value="@User.Id()" />
+    <input type="hidden" id="CartId" name="CartId" value="@Model.Cart.Id" /> <!-- Ensure CartId input is defined -->
 
     <label for="pickupLocation">Pickup Address:</label>
 
@@ -22,25 +24,25 @@
     }
     else
     {
-        <p>Choose pickup location on the map because you address is not set </p>
+        <p>Choose pickup location on the map because your address is not set</p>
     }
 
-   <div id="map" style="height: 400px;"></div>
+    <div id="map" style="height: 400px;"></div>
     <input type="hidden" id="latitude" name="Latitude" />
     <input type="hidden" id="longitude" name="Longitude" />
 
-    <!-- Display Cart Partial View -->
+    <!-- Placeholder for Cart Partial View -->
     <div id="cartPartial">
         @await Html.PartialAsync("_CartPartial", Model.Cart)
     </div>
 
-    <a asp-controller="OrderFood" asp-action="AddMenuItemToCart" asp-route-id="@Model.Cart" class="btn btn-primary mr-2">Add Item To Cart</a>
+    <a id="chooseItemLink" href="#" class="btn btn-primary mr-2">Choose item to add</a>
 
-    <button type="submit" class="btn btn-primary">Submit Order</button>
+    <button id="submitButton" type="button" class="btn btn-primary">Submit Order</button>
 </form>
 
 <!-- Include site.js script -->
 <script src="~/js/site.js"></script>
-
-<!-- Google Maps API script (with callback to initMap) -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&callback=initMap" async defer></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4V4pu0qhJwNFnazaeGhXjxBHoltHCh3o&callback=initMap" async defer></script>
+<!-- Include orderFood.js script -->
+<script src="~/js/orderFood.js"></script>

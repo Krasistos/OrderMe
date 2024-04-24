@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OrderMe.Core.Contracts;
+using OrderMe.Core.Models.MenuItem;
 using OrderMe.Core.Models.OrderFood;
 using OrderMe.Infrastructure.Data.Common;
 using OrderMe.Infrastructure.Data.Models;
@@ -25,7 +28,23 @@ namespace OrderMe.Core.Services
             };
 
             await repository.AddAsync(cart);
+            await repository.SaveChangesAsync();
+
             return cart;
+        }
+
+        public async Task<List<MenuItemIndexServiceModel>> GetAllMenuItems()
+        {
+            return await repository.AllReadOnly<MenuItem>().Select(m => new MenuItemIndexServiceModel
+            {
+                Id = m.Id,
+                Name = m.Name,
+                Description = m.Description,
+                Price = m.Price,
+                Quantity = m.Quantity,
+                RestaurantId = m.RestaurantId,
+                ImageData = m.ImageData,
+            }).ToListAsync();
         }
 
         public async Task<Driver> GetFreeDriver()

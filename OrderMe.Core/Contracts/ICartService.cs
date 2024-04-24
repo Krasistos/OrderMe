@@ -9,5 +9,7 @@ namespace OrderMe.Core.Contracts
         Task IncreaseQuantityOfMenuItem(int menuItemId, int cartId);
         Task RemoveMenuItemFromCart(int menuItemId, int cartId);
 
+        Task<Cart> GetCartByIdAsync(int cartId);
+
     }
 }

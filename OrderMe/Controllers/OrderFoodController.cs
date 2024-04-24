@@ -4,6 +4,7 @@ using OrderMe.Core.Contracts;
 using OrderMe.Core.Models.OrderFood;
 using OrderMe.Core.Services;
 using OrderMe.Infrastructure.Data.Models;
+using static OrderMe.Infrastructure.Constants.DataConstants;
 
 namespace OrderMe.Controllers
 {
@@ -11,7 +12,6 @@ namespace OrderMe.Controllers
     {
         private readonly IOrderFoodService orderFoodService;
         private readonly ICartService cartService;
-
 
         public OrderFoodController(IOrderFoodService _orderFoodService, ICartService _cartService)
         {
@@ -24,25 +24,36 @@ namespace OrderMe.Controllers
         }
 
 
-
         [HttpGet]
         public async Task<IActionResult> SubmitOrder()
         {
             var driver = orderFoodService.GetFreeDriver().Result;
-            var vehicle = orderFoodService.GetFreeVehicle().Result;
+            var vehicle =  orderFoodService.GetFreeVehicle().Result;
 
-            var cart = orderFoodService.CreateCart(User.Id());
+            var cart = await orderFoodService.CreateCart(User.Id());
 
             if (driver == null || vehicle == null)
             {
                 return View("CannotNow");
             }
 
-            return View("SubmitOrder", new OrderFoodForm { DriverId = driver.Id, VehicleId = vehicle.Id, Cart = cart.Result });
+            return View("SubmitOrder", new OrderFoodForm { DriverId = driver.Id, VehicleId = vehicle.Id, Cart = cart });
         }
 
-        public async Task<IActionResult> AddMenuItemToCart(int menuItemId, Cart cart)
+
+        public async Task<IActionResult> ChooseItemToAdd(int cartId) 
         {
+            var menuItems = orderFoodService.GetAllMenuItems().Result;
+            ViewBag.CartId = cartId;
+
+            return View("_ChooseItemToAddPartial",menuItems);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenuItemToCart(int menuItemId, int cartId)
+        {
+            var cart = await cartService.GetCartByIdAsync(cartId);
+
             await cartService.AddMenuItemCart(menuItemId, cart.Id);
             return PartialView("_CartPartial", cart); // Return updated cart partial view
         }

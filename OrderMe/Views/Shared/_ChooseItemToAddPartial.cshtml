@@ -1,0 +1,35 @@
+﻿@model List<MenuItemIndexServiceModel>
+
+@if (Model.Count > 0)
+{
+    <div class="row">
+        @foreach (var menuItem in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h5 class="card-title">MenuItem Name: @menuItem.Name</h5>
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(menuItem.ImageData)" class="card-img" />
+                        <p class="card-text">Description: @menuItem.Description</p>
+                        <p class="card-text">Price: $@menuItem.Price</p>
+                        <p class="card-text">Quantity: @menuItem.Quantity</p>
+
+                        <a id="addItemToCart" href="#" class="btn btn-primary mr-2" data-menuItemId="@menuItem.Id">Add ItemToCart</a>
+
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h2>No items found.</h2>
+}
+
+<!-- JavaScript to handle adding items to cart -->
+<!-- Include site.js script -->
+<script src="~/js/site.js"></script>
+<!-- Include orderFood.js script -->
+<script src="~/js/orderFood.js"></script>
