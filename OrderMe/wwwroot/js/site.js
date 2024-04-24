@@ -9,11 +9,13 @@ function initMap() {
 
     // Add click event listener to the map to place markers
     map.addListener('click', function (event) {
-        placeMarker(event.latLng);
+        placeMarkerOne(event.latLng);
     });
+
+    console.log('Inside one map render');
 }
 
-function placeMarker(location) {
+function placeMarkerOne(location) {
     // Remove previous marker if exists
     if (marker) {
         marker.setMap(null);
@@ -29,6 +31,8 @@ function placeMarker(location) {
     // Update hidden input fields with marker's position
     document.getElementById('latitude').value = location.lat();
     document.getElementById('longitude').value = location.lng();
+
+    console.log('Inside place marker one map ');
 }
 
 
@@ -58,6 +62,8 @@ function initTwoMaps() {
     mapDropoff.addListener('click', function (event) {
         placeMarker(event.latLng, 'dropoff');
     });
+
+    console.log('Inside two maps render');
 }
 
 function placeMarker(location, type) {
@@ -88,4 +94,6 @@ function placeMarker(location, type) {
         document.getElementById('latitudeDrop').value = location.lat();
         document.getElementById('longitudeDrop').value = location.lng();
     }
+
+    console.log('Inside place marker two maps ');
 }
