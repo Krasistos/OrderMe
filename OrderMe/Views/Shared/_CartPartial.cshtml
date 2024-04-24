@@ -1,0 +1,33 @@
+﻿@model OrderMe.Infrastructure.Data.Models.Cart
+
+@if (Model != null && Model.MenuItems.Any())
+{
+    <h3>Items in Your Cart:</h3>
+    <ul id="cartItems">
+        @foreach (var item in Model.MenuItems)
+        {
+            <li>
+                @item.Name - $@item.Price
+                <form asp-controller="OrderFood" asp-action="DecreaseQuantityOfMenuItem" method="post">
+                    <input type="hidden" name="menuItemId" value="@item.Id" />
+                    <button type="submit">-</button>
+                </form>
+                <span>@item.Quantity</span>
+                <form asp-controller="OrderFood" asp-action="IncreaseQuantityOfMenuItem" method="post">
+                    <input type="hidden" name="menuItemId" value="@item.Id" />
+                    <button type="submit">+</button>
+                </form>
+
+                <form asp-controller="OrderFood" asp-action="RemoveMenuItemFromCart" method="post">
+                    <input type="hidden" name="menuItemId" value="@item.Id" />
+                    <button type="submit">Remove</button>
+                    </form>
+
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}

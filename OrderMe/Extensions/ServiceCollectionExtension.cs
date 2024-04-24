@@ -18,6 +18,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IMenuItemService, MenuItemService>();
             services.AddScoped<IOrderRideService, OrderRideService>();
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IOrderFoodService, OrderFoodService>();
+            services.AddScoped<ICartService, CartService>();
 
             return services;
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrderMe.Core.Contracts;
 using OrderMe.Core.Models.OrderRide;
+using OrderMe.Infrastructure.Data.Models;
 
 namespace OrderMe.Controllers
 {
@@ -11,6 +12,7 @@ namespace OrderMe.Controllers
         public OrderRideController(IOrderRideService orderRideService)
         {
             this.orderRideService = orderRideService;
+
         }
         [HttpGet]
         public async Task<IActionResult> SubmitOrder()
@@ -50,5 +52,6 @@ namespace OrderMe.Controllers
                 return View(model);
             }
         }
+
     }
 }
